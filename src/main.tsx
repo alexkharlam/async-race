@@ -10,12 +10,13 @@ import {
 import App from './App.tsx';
 import Garage from './views/Garage.tsx';
 import Winners from './views/Winners.tsx';
+import routerPaths from './data/routerPaths.ts';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />} errorElement={<p>Hi there, error</p>}>
-      <Route index path="/" element={<Garage />} />
-      <Route path="/winners" element={<Winners />} />
+      <Route index path={routerPaths.garage} element={<Garage />} />
+      <Route path={routerPaths.winners} element={<Winners />} />
     </Route>,
   ),
 );
