@@ -8,12 +8,14 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 import App from './App.tsx';
+import Garage from './views/Garage.tsx';
+import Winners from './views/Winners.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />} errorElement={<p>Hi there, error</p>}>
-      <Route index path="/" element={<p>Home</p>} />
-      <Route path="/garage" element={<p>Garage</p>} />
+      <Route index path="/" element={<Garage />} />
+      <Route path="/garage" element={<Winners />} />
     </Route>,
   ),
 );
