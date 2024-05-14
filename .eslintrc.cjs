@@ -18,5 +18,6 @@ module.exports = {
   rules: {
     'react/jsx-filename-extension': ['error', { extensions: ['.jsx', '.tsx'] }],
     '@typescript-eslint/no-explicit-any': 'error',
+    'object-curly-newline': 'off',
   },
 };
