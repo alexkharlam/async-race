@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@vitejs/plugin-react": "^4.2.1",
+    "animejs": "^3.2.2",
     "axios": "^1.6.8",
     "classnames": "^2.5.1",
     "react": "^18.2.0",
