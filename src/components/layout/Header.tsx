@@ -9,7 +9,7 @@ export default function Header() {
   const { pathname } = useLocation();
 
   return (
-    <header className="flex py-3 px-3 justify-between items-center border-b-2 border-gray-400">
+    <header className="flex py-3 px-3 justify-between items-center border-b-2 border-gray-100">
       <nav className=" flex gap-4">
         <ImgNavLink
           pathname={pathname}
