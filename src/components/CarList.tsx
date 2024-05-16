@@ -22,7 +22,7 @@ export default function CarList({ cars }: Props) {
         />
       </div>
 
-      <p className="text-base mb-3">{`Total ${cars.length} cars`}</p>
+      <p className="text-base mb-3">{`You have ${cars.length} cars!`}</p>
 
       {paginatedData.map((car) => (
         <CarItem key={car.id} car={car} />
