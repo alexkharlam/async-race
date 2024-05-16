@@ -5,9 +5,10 @@ import { createCar } from '../../utils/api.ts';
 
 type Props = {
   onClose: () => void;
+  onNewCar: () => void;
 };
 
-export default function NewCarForm({ onClose }: Props) {
+export default function NewCarForm({ onClose, onNewCar }: Props) {
   const [error, setError] = useState(false);
   const [name, setName] = useState('');
   const [color, setColor] = useState('#333333');
@@ -24,6 +25,7 @@ export default function NewCarForm({ onClose }: Props) {
 
       if (res.status === 201) {
         setName('');
+        onNewCar();
         onClose();
       }
     } catch (err) {
