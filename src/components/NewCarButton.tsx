@@ -2,18 +2,15 @@ import { useState } from 'react';
 import { Plus } from 'react-feather';
 import CarForm from './CarForm.tsx';
 import { createCar } from '../utils/api.ts';
+import useModal from '../hooks/useModal.tsx';
 
 type Props = {
   onNewCar: () => void;
 };
 
 export default function NewCarButton({ onNewCar }: Props) {
-  const [isOpen, setIsOpen] = useState(false);
+  const { open, toggleModal } = useModal();
   const [error, setError] = useState(false);
-
-  const toggleModal = () => {
-    setIsOpen((state) => !state);
-  };
 
   const handleCreateCar = async (name: string, color: string) => {
     setError(false);
@@ -40,7 +37,7 @@ export default function NewCarButton({ onNewCar }: Props) {
         <Plus />
         <span>Add car</span>
       </button>
-      {isOpen && (
+      {open && (
         <div className="absolute">
           <CarForm
             onClose={toggleModal}
