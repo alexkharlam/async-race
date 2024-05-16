@@ -21,7 +21,7 @@ export const createCar = async (color: string, name: string) => {
   return res;
 };
 
-export const deleteCar = async (carId: string) => {
+export const deleteCar = async (carId: number) => {
   const res = await axios.delete(`${BASE_URL}/garage/${carId}`);
 
   return res.data;
