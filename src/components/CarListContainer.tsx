@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Cars } from '../types/types.ts';
 import { getCars } from '../utils/api.ts';
 import CarList from './CarList.tsx';
-import NewCarButton from './NewCar/NewCarButton.tsx';
+import NewCarButton from './NewCarButton.tsx';
 import GenerateRandomCars from './GenerateRandomCars.tsx';
 
 export default function CarListContainer() {
@@ -23,7 +23,7 @@ export default function CarListContainer() {
         <NewCarButton onNewCar={initCars} />
         <GenerateRandomCars onNewCars={initCars} />
       </div>
-      {cars && cars.length > 0 && <CarList cars={cars} />}
+      {cars && cars.length > 0 && <CarList onUpdate={initCars} cars={cars} />}
     </>
   );
 }

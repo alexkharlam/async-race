@@ -5,9 +5,10 @@ import CarItem from './CarItem/CarItem.tsx';
 
 type Props = {
   cars: Cars;
+  onUpdate: () => void;
 };
 
-export default function CarList({ cars }: Props) {
+export default function CarList({ cars, onUpdate }: Props) {
   const { paginatedData, currentPage, pageCount, setNextPage, setPrevPage } =
     usePagination(cars);
 
@@ -16,7 +17,7 @@ export default function CarList({ cars }: Props) {
       <p className="text-base mb-3">{`You have ${cars.length} cars!`}</p>
 
       {paginatedData.map((car) => (
-        <CarItem key={car.id} car={car} />
+        <CarItem onUpdate={onUpdate} key={car.id} car={car} />
       ))}
       <div className="ml-auto flex justify-end">
         <PaginationButtons

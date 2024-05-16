@@ -1,21 +1,21 @@
 import { useRef, useState } from 'react';
-import { Play, StopCircle } from 'react-feather';
-
 import anime, { AnimeInstance } from 'animejs';
 import axios from 'axios';
 import { Car, CarStatus } from '../../types/types.ts';
 import config from '../../data/config.ts';
-import TrackButton from './TrackButton.tsx';
 import Track from './Track.tsx';
 import StatusMessage from './StatusMessage.tsx';
+import MoveButtons from './MoveButtons.tsx';
+import ManageCarButtons from './ManageCarButtons.tsx';
 
 const { BASE_URL, TRACK_LENGTH } = config;
 
 type Props = {
   car: Car;
+  onUpdate: () => void;
 };
 
-export default function CarItem({ car }: Props) {
+export default function CarItem({ car, onUpdate }: Props) {
   const carRef = useRef<HTMLImageElement | null>(null);
   const [status, setStatus] = useState<CarStatus>('ready');
   let instance: AnimeInstance | null = null;
@@ -54,23 +54,13 @@ export default function CarItem({ car }: Props) {
 
   return (
     <div className="mb-2">
-      <div className="flex gap-1.5 relative items-center mb-2">
-        <TrackButton
-          classname="bg-green-700"
-          onClick={handleStart}
-          disabled={status === 'running'}
-        >
-          <Play />
-          Start
-        </TrackButton>
-        <TrackButton
-          classname="bg-red-700"
-          onClick={handleStop}
-          disabled={status === 'running'}
-        >
-          <StopCircle />
-          Stop
-        </TrackButton>
+      <div className="flex gap-1 relative items-center mb-2">
+        <ManageCarButtons onUpdate={onUpdate} car={car} />
+        <MoveButtons
+          status={status}
+          onStart={handleStart}
+          onStop={handleStop}
+        />
         <Track status={status} car={car} carRef={carRef} />
         <StatusMessage status={status} />
       </div>
