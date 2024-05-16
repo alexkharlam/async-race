@@ -1,13 +1,14 @@
 import randomColor from 'randomcolor';
 import { createCar } from '../utils/api.ts';
+import config from '../data/config.ts';
+
+const { RANDOM_CARS_QUANTITY } = config;
 
 type Props = {
   onNewCars: () => void;
 };
 
 export default function GenerateRandomCars({ onNewCars }: Props) {
-  const carsToCreate = 100;
-
   const requestCreateCar = async (color: string, name: string) => {
     try {
       await createCar(color, name);
@@ -19,7 +20,7 @@ export default function GenerateRandomCars({ onNewCars }: Props) {
   const generateCars = async () => {
     const promises = [];
 
-    for (let i = 0; i < carsToCreate; i += 1) {
+    for (let i = 0; i < RANDOM_CARS_QUANTITY; i += 1) {
       const color = randomColor();
       const name = `Car #${i + 1}`;
 
@@ -34,8 +35,12 @@ export default function GenerateRandomCars({ onNewCars }: Props) {
   };
 
   return (
-    <button onClick={generateCars} type="button">
-      GenerateRandomCars
+    <button
+      className="flex gap-1 relative px-3 py-2 rounded-sm hover:bg-rose-900 bg-rose-800 text-white mb-3 mt-2 mx-2"
+      onClick={generateCars}
+      type="button"
+    >
+      {`Create ${RANDOM_CARS_QUANTITY} random cars`}
     </button>
   );
 }
