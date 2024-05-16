@@ -1,6 +1,6 @@
 # Async race project
 
-170 points
+185 points
 
 ## Deployed project
 
@@ -27,7 +27,7 @@ https://react-race.netlify.app/
 ### 1. View Configuration (30 points)
 
 - [x] **Two Views (10 points):** Implement two primary views: "Garage" and "Winners".
-- [ ] **Garage View Content (5 points):** The "Garage" view must display its name, the current page number, and the total number of cars in the database (how many car user has in his garage).
+- [x] **Garage View Content (5 points):** The "Garage" view must display its name, the current page number, and the total number of cars in the database (how many car user has in his garage).
 - [ ] **Winners View Content (5 points):** The "Winners" view should similarly display its name, the current page number, and the total count of records in the database (how many records the winners table contains).
 - [ ] **Persistent State (10 points):** Ensure the view state remains consistent when navigating between views. This includes preserving page numbers and input states. For example, page number shouldn't be reset, input controls should contain that they contained before switching, etc.
 
@@ -38,7 +38,7 @@ https://react-race.netlify.app/
 - [ ] **CRUD Operations (20 points):** Enable users to create, update, and delete cars, and display the list of cars. A car has two attributes: "name" and "color". For "delete"-operation car should be deleted from "garage" table as well as from "winners".
 - [ ] **Color Selection (10 points):** Allow color selection from an RGB palette ([like here](https://colorspire.com/rgb-color-wheel/)), displaying the selected color on the car's image along with its name.
 - [ ] **Management Buttons (5 points):** Provide buttons near each car's image for updating its attributes or deleting it.
-- [ ] **Pagination (10 points):** Implement pagination for the "Garage" view, displaying 7 cars per page.
+- [x] **Pagination (10 points):** Implement pagination for the "Garage" view, displaying 7 cars per page.
 
 #### Car Generation (10 points)
 
