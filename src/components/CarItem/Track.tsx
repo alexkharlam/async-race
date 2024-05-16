@@ -11,7 +11,8 @@ type Props = {
 };
 
 export default function Track({ carRef, car, status }: Props) {
-  const trackLength = 800;
+  const trackLength = window.innerWidth - 200;
+  console.log(window.innerWidth);
 
   const containerClass = classNames(
     'border-t-2 border-b-2 relative pl-1 border-l-2',

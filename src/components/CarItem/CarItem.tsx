@@ -9,7 +9,8 @@ import TrackButton from './TrackButton.tsx';
 import Track from './Track.tsx';
 import StatusMessage from './StatusMessage.tsx';
 
-const trackLength = 800;
+const trackLength = window.innerWidth - 260;
+
 const { BASE_URL } = config;
 
 type Props = {
@@ -55,7 +56,7 @@ export default function CarItem({ car }: Props) {
 
   return (
     <div className="mb-2">
-      <div className="flex gap-1.5 items-center mb-2">
+      <div className="flex gap-1.5 relative items-center mb-2">
         <TrackButton
           classname="bg-green-700"
           onClick={handleStart}
