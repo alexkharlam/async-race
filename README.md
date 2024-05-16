@@ -1,6 +1,6 @@
 # Async race project
 
-185 points
+195 points
 
 ## Deployed project
 
@@ -42,7 +42,7 @@ https://react-race.netlify.app/
 
 #### Car Generation (10 points)
 
-- [ ] **Random Car Creation (10 points):** There should be a button to create random cars (100 cars per click). Name should be assembled from two random parts, for example "Tesla" + "Model S", or "Ford" + "Mustang" (At least 10 different names for each part). Color should be also generated randomly.
+- [x] **Random Car Creation (10 points):** There should be a button to create random cars (100 cars per click). Name should be assembled from two random parts, for example "Tesla" + "Model S", or "Ford" + "Mustang" (At least 10 different names for each part). Color should be also generated randomly.
 
 ## 🚗 Car Animation (50 points)
 
