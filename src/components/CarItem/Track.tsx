@@ -1,6 +1,6 @@
+import { FaCarSide } from 'react-icons/fa';
 import classNames from 'classnames';
 import { RefObject } from 'react';
-import carIcon from '../../assets/car-icon.svg';
 import { Car, CarStatus } from '../../types/types.ts';
 import CarInfo from './CarInfo.tsx';
 
@@ -22,13 +22,9 @@ export default function Track({ carRef, car, status }: Props) {
 
   return (
     <div style={{ width: `${trackLength + 60}px` }} className={containerClass}>
-      <img
-        className="z-50"
-        alt="Car track"
-        ref={carRef}
-        width="60"
-        src={carIcon}
-      />
+      <div ref={carRef}>
+        <FaCarSide color={car.color} size={50} className="z-10" />
+      </div>
       <CarInfo car={car} />
     </div>
   );
