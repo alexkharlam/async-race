@@ -13,6 +13,11 @@ export default function CarList({ cars }: Props) {
 
   return (
     <div className="p-2">
+      <p className="text-base mb-3">{`You have ${cars.length} cars!`}</p>
+
+      {paginatedData.map((car) => (
+        <CarItem key={car.id} car={car} />
+      ))}
       <div className="ml-auto flex justify-end">
         <PaginationButtons
           currentPage={currentPage}
@@ -21,12 +26,6 @@ export default function CarList({ cars }: Props) {
           setPrevPage={setPrevPage}
         />
       </div>
-
-      <p className="text-base mb-3">{`You have ${cars.length} cars!`}</p>
-
-      {paginatedData.map((car) => (
-        <CarItem key={car.id} car={car} />
-      ))}
     </div>
   );
 }
