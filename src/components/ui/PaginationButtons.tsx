@@ -19,7 +19,7 @@ export default function PaginationButtons({
   );
 
   return (
-    <div className="flex gap-1 items-center">
+    <div className="flex gap-2 items-center p-2">
       <button
         onClick={setPrevPage}
         disabled={currentPage === 0}
@@ -29,7 +29,7 @@ export default function PaginationButtons({
         <ArrowLeft />
       </button>
       <p className="text-base">
-        Page:
+        <span>Page: </span>
         {currentPage + 1}
       </p>
       <button
