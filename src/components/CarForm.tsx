@@ -1,47 +1,34 @@
 import { X } from 'react-feather';
 import { ChromePicker, ColorResult } from 'react-color';
 import { FormEvent, useState, ChangeEvent } from 'react';
-import { createCar } from '../../utils/api.ts';
 
 type Props = {
   onClose: () => void;
-  onNewCar: () => void;
+  onSubmit: (name: string, color: string) => void;
+  error: boolean;
 };
 
-export default function NewCarForm({ onClose, onNewCar }: Props) {
-  const [error, setError] = useState(false);
+export default function CarForm({ onClose, onSubmit, error }: Props) {
   const [name, setName] = useState('');
   const [color, setColor] = useState('#333333');
   const handleChangeColor = (newColor: ColorResult) => {
     setColor(newColor.hex);
   };
 
-  const handleCreateCar = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError(false);
 
-    try {
-      const res = await createCar(color, name);
-
-      if (res.status === 201) {
-        setName('');
-        onNewCar();
-        onClose();
-      }
-    } catch (err) {
-      setError(true);
-    }
+    setName('');
+    onSubmit(name, color);
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setError(false);
-
     setName(e.target.value);
   };
 
   return (
     <form
-      onSubmit={handleCreateCar}
+      onSubmit={handleSubmit}
       className="relative z-30 border-rose-800 border- shadow-md shadow-slate-500"
     >
       <button
