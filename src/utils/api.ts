@@ -18,7 +18,7 @@ export const getCar = async (carId: string) => {
 export const createCar = async (color: string, name: string) => {
   const res = await axios.post(`${BASE_URL}/garage`, { name, color });
 
-  return res.data;
+  return res;
 };
 
 export const deleteCar = async (carId: string) => {
