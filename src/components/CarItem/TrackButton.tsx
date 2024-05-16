@@ -16,7 +16,7 @@ export default function Button({
 }: Props) {
   const btnClass = classNames(
     classname,
-    'disabled:bg-gray-600 px-1.5 py-1 rounded-md hover:bg-opacity-90 flex gap-0.5 items-center transition-all duration-100 text-gray-100 rounded-sm',
+    'disabled:bg-gray-600 font-semibold text-center px-1.5 py-1 rounded-md hover:bg-opacity-90 transition-all duration-100 text-gray-100 rounded-sm',
   );
 
   return (
