@@ -19,8 +19,10 @@ export default function CarListContainer() {
 
   return (
     <>
-      <GenerateRandomCars onNewCars={initCars} />
-      <NewCarButton onNewCar={initCars} />
+      <div className="flex gap-1">
+        <NewCarButton onNewCar={initCars} />
+        <GenerateRandomCars onNewCars={initCars} />
+      </div>
       {cars && cars.length > 0 && <CarList cars={cars} />}
     </>
   );
