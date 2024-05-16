@@ -28,7 +28,7 @@ export default function Header() {
           Winners
         </ImgNavLink>
       </nav>
-      <img className="w-8 h-full" src={appLogo} alt="Logo" />
+      <img className="lg:w-8 w-6 h-full" src={appLogo} alt="Logo" />
     </header>
   );
 }

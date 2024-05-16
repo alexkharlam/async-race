@@ -20,14 +20,14 @@ export default function ImgNavLink({
   const isActivePath = pathname === to;
 
   const linkClass = classNames(
-    'flex flex-col items-center hover:scale-105 transition-all duration-150',
+    'flex flex-col md:w-5 w-3.5 items-center hover:scale-105 transition-all duration-150',
     { 'opacity-60': !isActivePath },
   );
 
   return (
     <Link className={linkClass} to={to}>
-      <img width="110px" src={imgSrc} alt={imgAlt} />
-      <span className="font-semibold text-2xl">{children}</span>
+      <img className="w-full" width="110px" src={imgSrc} alt={imgAlt} />
+      <span className="font-semibold text-base md:text-2xl">{children}</span>
     </Link>
   );
 }
