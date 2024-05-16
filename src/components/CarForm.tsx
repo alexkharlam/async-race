@@ -6,11 +6,17 @@ type Props = {
   onClose: () => void;
   onSubmit: (name: string, color: string) => void;
   error: boolean;
+  initialColor: string;
 };
 
-export default function CarForm({ onClose, onSubmit, error }: Props) {
+export default function CarForm({
+  onClose,
+  onSubmit,
+  error,
+  initialColor,
+}: Props) {
   const [name, setName] = useState('');
-  const [color, setColor] = useState('#333333');
+  const [color, setColor] = useState(initialColor);
   const handleChangeColor = (newColor: ColorResult) => {
     setColor(newColor.hex);
   };
@@ -55,7 +61,7 @@ export default function CarForm({ onClose, onSubmit, error }: Props) {
         className="w-full disabled:bg-gray-800 text-center py-2 bg-rose-800 text-gray-100 font-semibold"
         type="submit"
       >
-        Create car
+        Submit
       </button>
     </form>
   );
