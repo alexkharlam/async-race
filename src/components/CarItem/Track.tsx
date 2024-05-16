@@ -3,6 +3,9 @@ import classNames from 'classnames';
 import { RefObject } from 'react';
 import { Car, CarStatus } from '../../types/types.ts';
 import CarInfo from './CarInfo.tsx';
+import config from '../../data/config.ts';
+
+const { TRACK_LENGTH } = config;
 
 type Props = {
   carRef: RefObject<HTMLImageElement>;
@@ -11,9 +14,6 @@ type Props = {
 };
 
 export default function Track({ carRef, car, status }: Props) {
-  const trackLength = window.innerWidth - 200;
-  console.log(window.innerWidth);
-
   const containerClass = classNames(
     'border-t-2 border-b-2 relative pl-1 border-l-2',
     { 'border-gray-400': status === 'ready' },
@@ -22,7 +22,7 @@ export default function Track({ carRef, car, status }: Props) {
   );
 
   return (
-    <div style={{ width: `${trackLength + 60}px` }} className={containerClass}>
+    <div style={{ width: `${TRACK_LENGTH + 60}px` }} className={containerClass}>
       <div ref={carRef}>
         <FaCarSide color={car.color} size={50} className="z-10" />
       </div>

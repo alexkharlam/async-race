@@ -9,9 +9,7 @@ import TrackButton from './TrackButton.tsx';
 import Track from './Track.tsx';
 import StatusMessage from './StatusMessage.tsx';
 
-const trackLength = window.innerWidth - 260;
-
-const { BASE_URL } = config;
+const { BASE_URL, TRACK_LENGTH } = config;
 
 type Props = {
   car: Car;
@@ -31,7 +29,7 @@ export default function CarItem({ car }: Props) {
 
       instance = anime({
         targets: carRef.current,
-        translateX: `${trackLength}px`,
+        translateX: `${TRACK_LENGTH}px`,
         duration,
         easing: 'linear',
         complete: () => {
