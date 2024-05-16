@@ -24,7 +24,7 @@ export default function Track({ carRef, car, status }: Props) {
   return (
     <div style={{ width: `${TRACK_LENGTH + 60}px` }} className={containerClass}>
       <div ref={carRef}>
-        <FaCarSide color={car.color} size={50} className="z-10" />
+        <FaCarSide color={car.color} size={60} className="z-10" />
       </div>
       <CarInfo car={car} />
     </div>
