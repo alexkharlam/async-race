@@ -40,6 +40,7 @@ export default function NewCarButton({ onNewCar }: Props) {
       {open && (
         <div className="absolute">
           <CarForm
+            initialColor="#333333"
             onClose={toggleModal}
             error={error}
             onSubmit={handleCreateCar}
