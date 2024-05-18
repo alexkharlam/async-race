@@ -28,7 +28,7 @@ export default function CarItem({ car, onUpdate }: Props) {
   const handleStart = async () => {
     try {
       const { data } = await axios.patch(
-        `${BASE_URL}/engine/?id=${200}&status=started`,
+        `${BASE_URL}/engine/?id=${car.id}&status=started`,
       );
       const dataDuration = data.distance / data.velocity;
 
@@ -42,7 +42,7 @@ export default function CarItem({ car, onUpdate }: Props) {
         duration: dataDuration / 1000,
       }));
 
-      await axios.patch(`${BASE_URL}/engine/?id=${200}&status=drive`);
+      await axios.patch(`${BASE_URL}/engine/?id=${car.id}&status=drive`);
     } catch (err) {
       setAnimation((prevState) => ({
         ...prevState,
