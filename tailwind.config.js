@@ -2,7 +2,15 @@
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        blue: {
+          primary: '#37BCF8',
+          25: '#E2E8F0',
+          1000: '#10172A',
+        },
+      },
+    },
     spacing: {
       0.5: '0.125rem',
       1: '0.25rem',

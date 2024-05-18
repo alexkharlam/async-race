@@ -9,7 +9,7 @@ export default function Container({ children }: Props) {
   return (
     <>
       <Header />
-      <main>{children}</main>
+      <main className="px-2">{children}</main>
     </>
   );
 }

@@ -1,34 +1,23 @@
+import { Home, Star } from 'react-feather';
 import { useLocation } from 'react-router-dom';
 import routerPaths from '../../data/routerPaths.ts';
-import garageIcon from '../../assets/garage-icon.png';
-import winnerIcon from '../../assets/winner-icon.png';
-import appLogo from '../../assets/highres-logo.png';
-import ImgNavLink from '../ui/ImgNavLink.tsx';
+import appLogo from '../../assets/app-logo.png';
+import NavLink from '../ui/NavLink.tsx';
 
 export default function Header() {
   const { pathname } = useLocation();
 
   return (
-    <header className="flex py-3 px-3 justify-between items-center border-b-2 border-gray-100">
-      <nav className=" flex gap-4">
-        <ImgNavLink
-          pathname={pathname}
-          to={routerPaths.garage}
-          imgSrc={garageIcon}
-          imgAlt="garage"
-        >
+    <header className="flex py-2 px-3 justify-between items-center relative border-[1px] border-blue-950">
+      <nav className="flex sm:gap-4 gap-2">
+        <NavLink LinkIcon={Home} pathname={pathname} to={routerPaths.garage}>
           Garage
-        </ImgNavLink>
-        <ImgNavLink
-          pathname={pathname}
-          to={routerPaths.winners}
-          imgSrc={winnerIcon}
-          imgAlt="garage"
-        >
+        </NavLink>
+        <NavLink LinkIcon={Star} pathname={pathname} to={routerPaths.winners}>
           Winners
-        </ImgNavLink>
+        </NavLink>
       </nav>
-      <img className="lg:w-8 w-6 h-full" src={appLogo} alt="Logo" />
+      <img className="w-6" src={appLogo} alt="Logo" />
     </header>
   );
 }
