@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { FaCarSide } from 'react-icons/fa';
+import { PiCarProfileFill } from 'react-icons/pi';
 import classNames from 'classnames';
 import { AnimationState, Car } from '../../types/types.ts';
 import CarInfo from './CarInfo.tsx';
@@ -33,7 +33,7 @@ export default function Track({ car, animation, onUpdate, onComplete }: Props) {
         onUpdate={onUpdate}
         onAnimationComplete={onComplete}
       >
-        <FaCarSide color={car.color} size={60} className="z-10" />
+        <PiCarProfileFill color={car.color} size={60} className="z-10" />
       </motion.div>
       <CarInfo car={car} />
     </div>
