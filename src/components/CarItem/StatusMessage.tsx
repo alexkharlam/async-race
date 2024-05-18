@@ -6,7 +6,7 @@ type Props = {
 
 export default function StatusMessage({ animation }: Props) {
   return (
-    <div className="absolute -translate-y-1/2 top-1/2 right-[160px]">
+    <div className="absolute -translate-y-1/2 top-1/2 right-[90px]">
       {animation.finished && (
         <p className="text-blue-primary text-base font-bold">FINISHED!</p>
       )}
