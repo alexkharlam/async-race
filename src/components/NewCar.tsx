@@ -8,7 +8,7 @@ type Props = {
   onCarsUpdate: () => void;
 };
 
-export default function NewCarButton({ onCarsUpdate }: Props) {
+export default function NewCar({ onCarsUpdate }: Props) {
   const { open, toggleModal } = useModal();
   const [error, setError] = useState(false);
 

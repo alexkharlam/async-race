@@ -8,7 +8,7 @@ type Props = {
   onCarsUpdate: () => void;
 };
 
-export default function GenerateRandomCars({ onCarsUpdate }: Props) {
+export default function GenerateCars({ onCarsUpdate }: Props) {
   const requestCreateCar = async (color: string, name: string) => {
     try {
       await createCar(color, name);
