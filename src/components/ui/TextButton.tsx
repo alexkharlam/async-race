@@ -5,11 +5,18 @@ type Props = {
   children: ReactNode;
   onClick: () => void;
   disabled?: boolean;
+  className?: string;
 };
 
-export default function TextButton({ children, onClick, disabled }: Props) {
+export default function TextButton({
+  children,
+  onClick,
+  disabled,
+  className,
+}: Props) {
   const btnClass = classNames(
-    'text-base font-bold text-blue-primary uppercase disabled:text-gray-300 disabled:bg-opacity-50',
+    'px-3 py-2.5 bg-blue-primary uppercase hover:bg-opacity-90 rounded-sm text-base font-bold text-white disabled:bg-opacity-25 disabled:cursor-default',
+    className,
   );
 
   return (
@@ -26,4 +33,5 @@ export default function TextButton({ children, onClick, disabled }: Props) {
 
 TextButton.defaultProps = {
   disabled: false,
+  className: '',
 };
