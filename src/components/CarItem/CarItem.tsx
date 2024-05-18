@@ -20,11 +20,11 @@ export default function CarItem({ car, onUpdate, race, onFinish }: Props) {
   useEffect(() => {
     if (race.isResetted) {
       handleStop();
-      return;
     }
-    if (!race.isRacing) return;
 
-    handleStart();
+    if (race.isRacing) {
+      handleStart();
+    }
   }, [race, handleStart, handleStop]);
 
   return (
