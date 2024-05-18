@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import { Race, Cars } from '../types/types.ts';
-import usePagination from '../hooks/usePagination.tsx';
-import PaginationButtons from './ui/PaginationButtons.tsx';
-import CarItem from './CarItem/CarItem.tsx';
+import { Cars } from '../../types/types.ts';
+import usePagination from '../../hooks/usePagination.tsx';
+import PaginationButtons from '../ui/PaginationButtons.tsx';
+import CarItem from '../CarItem/CarItem.tsx';
 import RaceButtons from './RaceButtons.tsx';
+import useRace from '../../hooks/useRace.tsx';
 
 type Props = {
   cars: Cars;
@@ -11,35 +11,10 @@ type Props = {
 };
 
 export default function CarList({ cars, onUpdate }: Props) {
-  const [race, setRace] = useState<Race>({
-    isRacing: false,
-    winner: null,
-    isResetted: true,
-  });
+  const { race, startRace, resetRace, handleCarFinished } = useRace();
 
   const { paginatedData, currentPage, pageCount, setNextPage, setPrevPage } =
     usePagination(cars);
-
-  const handleRace = () => {
-    setRace({ isRacing: true, winner: null, isResetted: false });
-  };
-
-  const handleReset = () => {
-    setRace({
-      isRacing: false,
-      winner: null,
-      isResetted: true,
-    });
-  };
-
-  const handleFinish = (name: string, id: number) => {
-    if (!race.isRacing) return;
-    setRace((prevState) => ({
-      ...prevState,
-      isRacing: false,
-      winner: { name, id },
-    }));
-  };
 
   return (
     <div className="p-2">
@@ -47,11 +22,11 @@ export default function CarList({ cars, onUpdate }: Props) {
       {race.winner && (
         <p className="text-center text-3xl font-bold">{`Winner is ${race.winner.name}!`}</p>
       )}
-      <RaceButtons race={race} onReset={handleReset} onStartRace={handleRace} />
+      <RaceButtons race={race} onReset={resetRace} onStartRace={startRace} />
 
       {paginatedData.map((car) => (
         <CarItem
-          onFinish={handleFinish}
+          onFinish={handleCarFinished}
           race={race}
           onUpdate={onUpdate}
           key={car.id}

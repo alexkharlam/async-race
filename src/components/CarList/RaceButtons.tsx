@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { Race } from '../types/types.ts';
+import { Race } from '../../types/types.ts';
 
 type Props = {
   race: Race;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Cars } from '../types/types.ts';
 import { getCars } from '../utils/api.ts';
-import CarList from './CarList.tsx';
+import CarList from './CarList/CarList.tsx';
 import NewCarButton from './NewCarButton.tsx';
 import GenerateRandomCars from './GenerateRandomCars.tsx';
 
