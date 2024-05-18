@@ -1,26 +1,28 @@
-import { CarStatus } from '../../types/types.ts';
+import { AnimationState } from '../../types/types.ts';
 import TrackButton from './TrackButton.tsx';
 
 type Props = {
-  status: CarStatus;
   onStart: () => void;
   onStop: () => void;
+  animation: AnimationState;
 };
 
-export default function MoveButtons({ status, onStart, onStop }: Props) {
+export default function MoveButtons({ animation, onStart, onStop }: Props) {
   return (
     <div className="flex gap-0.5 flex-col">
       <TrackButton
         classname="bg-emerald-700"
         onClick={onStart}
-        disabled={status === 'running'}
+        disabled={
+          animation.isAnimating || (!animation.isStopped && !animation.isPaused)
+        }
       >
         START
       </TrackButton>
       <TrackButton
         classname="bg-rose-700"
         onClick={onStop}
-        disabled={status === 'running'}
+        disabled={animation.isStopped}
       >
         STOP
       </TrackButton>

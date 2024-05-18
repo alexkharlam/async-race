@@ -1,14 +1,13 @@
-import { useRef, useState } from 'react';
-import anime, { AnimeInstance } from 'animejs';
+import { useState } from 'react';
 import axios from 'axios';
-import { Car, CarStatus } from '../../types/types.ts';
+import { AnimationState, Car } from '../../types/types.ts';
 import config from '../../data/config.ts';
 import Track from './Track.tsx';
 import StatusMessage from './StatusMessage.tsx';
 import MoveButtons from './MoveButtons.tsx';
 import ManageCarButtons from './ManageCarButtons.tsx';
 
-const { BASE_URL, TRACK_LENGTH } = config;
+const { BASE_URL } = config;
 
 type Props = {
   car: Car;
@@ -16,40 +15,71 @@ type Props = {
 };
 
 export default function CarItem({ car, onUpdate }: Props) {
-  const carRef = useRef<HTMLImageElement | null>(null);
-  const [status, setStatus] = useState<CarStatus>('ready');
-  let instance: AnimeInstance | null = null;
+  const [animation, setAnimation] = useState<AnimationState>({
+    isAnimating: false,
+    isStopped: true,
+    isPaused: false,
+    x: 0,
+    broken: false,
+    finished: false,
+    duration: 0,
+  });
 
   const handleStart = async () => {
     try {
       const { data } = await axios.patch(
-        `${BASE_URL}/engine/?id=${car.id}&status=started`,
+        `${BASE_URL}/engine/?id=${200}&status=started`,
       );
-      const duration = data.distance / data.velocity;
+      const dataDuration = data.distance / data.velocity;
 
-      instance = anime({
-        targets: carRef.current,
-        translateX: `${TRACK_LENGTH}px`,
-        duration,
-        easing: 'linear',
-        complete: () => {
-          setStatus('finished');
-          //   onFinish(car.id);
-        },
-      });
+      setAnimation((prevState) => ({
+        ...prevState,
+        isAnimating: true,
+        isStopped: false,
+        isPaused: false,
+        finished: false,
+        broken: false,
+        duration: dataDuration / 1000,
+      }));
 
-      await axios.patch(`${BASE_URL}/engine/?id=${car.id}&status=drive`);
+      await axios.patch(`${BASE_URL}/engine/?id=${200}&status=drive`);
     } catch (err) {
-      if (instance) setStatus('broken');
-      instance?.pause();
+      setAnimation((prevState) => ({
+        ...prevState,
+        isAnimating: false,
+        isPaused: true,
+        broken: true,
+      }));
     }
   };
-  const handleStop = async () => {
-    await axios.patch(`${BASE_URL}/engine/?id=${car.id}&status=stopped`);
-    instance?.pause();
-    instance = null;
-    if (carRef.current) carRef.current.style.transform = 'translateX(0px)';
-    setStatus('ready');
+
+  const handleStop = () => {
+    setAnimation({
+      isAnimating: false,
+      isStopped: true,
+      isPaused: false,
+      x: 0,
+      broken: false,
+      finished: false,
+      duration: 0,
+    });
+  };
+
+  const handleUpdate = (latest: { x: number }) => {
+    if (animation.isAnimating) {
+      setAnimation((prevState) => ({
+        ...prevState,
+        x: latest.x,
+      }));
+    }
+  };
+
+  const handleFinish = () => {
+    if (!animation.isAnimating) return;
+    setAnimation((prevState) => ({
+      ...prevState,
+      finished: true,
+    }));
   };
 
   return (
@@ -57,12 +87,17 @@ export default function CarItem({ car, onUpdate }: Props) {
       <div className="flex gap-1 relative items-center mb-2">
         <ManageCarButtons onUpdate={onUpdate} car={car} />
         <MoveButtons
-          status={status}
+          animation={animation}
           onStart={handleStart}
           onStop={handleStop}
         />
-        <Track status={status} car={car} carRef={carRef} />
-        <StatusMessage status={status} />
+        <Track
+          animation={animation}
+          onComplete={handleFinish}
+          onUpdate={handleUpdate}
+          car={car}
+        />
+        <StatusMessage animation={animation} />
       </div>
     </div>
   );
