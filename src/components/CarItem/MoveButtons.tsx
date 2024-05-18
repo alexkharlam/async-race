@@ -1,5 +1,6 @@
+import { Play, Pause } from 'react-feather';
 import { AnimationState } from '../../types/types.ts';
-import TrackButton from './TrackButton.tsx';
+import IconButton from '../ui/IconButton.tsx';
 
 type Props = {
   onStart: () => void;
@@ -8,24 +9,26 @@ type Props = {
 };
 
 export default function MoveButtons({ animation, onStart, onStop }: Props) {
+  const isStartDisabled =
+    animation.isAnimating || (!animation.isStopped && !animation.isPaused);
+
+  const isStopDisabled = animation.isStopped;
+
   return (
-    <div className="flex gap-0.5 flex-col">
-      <TrackButton
-        classname="bg-emerald-700"
+    <div className="flex items-center gap-0.5 flex-col">
+      <IconButton
+        ButtonIcon={Play}
+        disabled={isStartDisabled}
         onClick={onStart}
-        disabled={
-          animation.isAnimating || (!animation.isStopped && !animation.isPaused)
-        }
-      >
-        START
-      </TrackButton>
-      <TrackButton
-        classname="bg-rose-700"
+        classname="bg-green-600"
+      />
+
+      <IconButton
+        ButtonIcon={Pause}
+        disabled={isStopDisabled}
         onClick={onStop}
-        disabled={animation.isStopped}
-      >
-        STOP
-      </TrackButton>
+        classname="bg-red-600"
+      />
     </div>
   );
 }
