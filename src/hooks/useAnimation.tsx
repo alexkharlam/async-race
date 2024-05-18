@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import axios from 'axios';
 import config from '../data/config.ts';
 import { AnimationState, Car } from '../types/types.ts';
 
 const { BASE_URL } = config;
 
-function useAnimation(car: Car) {
+function useAnimation(car: Car, onFinish: (name: string, id: number) => void) {
   const [animation, setAnimation] = useState<AnimationState>({
     isAnimating: false,
     isStopped: true,
@@ -16,7 +16,7 @@ function useAnimation(car: Car) {
     duration: 0,
   });
 
-  const handleStart = async () => {
+  const handleStart = useCallback(async () => {
     try {
       const { data } = await axios.patch(
         `${BASE_URL}/engine/?id=${car.id}&status=started`,
@@ -42,9 +42,9 @@ function useAnimation(car: Car) {
         broken: true,
       }));
     }
-  };
+  }, [car.id]);
 
-  const handleStop = () => {
+  const handleStop = useCallback(() => {
     setAnimation({
       isAnimating: false,
       isStopped: true,
@@ -54,24 +54,28 @@ function useAnimation(car: Car) {
       finished: false,
       duration: 0,
     });
-  };
+  }, []);
 
-  const handleUpdate = (latest: { x: number }) => {
-    if (animation.isAnimating) {
-      setAnimation((prevState) => ({
-        ...prevState,
-        x: latest.x,
-      }));
-    }
-  };
+  const handleUpdate = useCallback(
+    (latest: { x: number }) => {
+      if (animation.isAnimating) {
+        setAnimation((prevState) => ({
+          ...prevState,
+          x: latest.x,
+        }));
+      }
+    },
+    [animation.isAnimating],
+  );
 
-  const handleFinish = () => {
+  const handleFinish = useCallback(() => {
     if (!animation.isAnimating) return;
     setAnimation((prevState) => ({
       ...prevState,
       finished: true,
     }));
-  };
+    onFinish(car.name, car.id);
+  }, [animation.isAnimating, car.id, car.name, onFinish]);
 
   return { handleStart, animation, handleStop, handleUpdate, handleFinish };
 }
