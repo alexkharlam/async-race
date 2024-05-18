@@ -12,7 +12,6 @@ type Props = {
 
 export default function CarList({ cars, onUpdate }: Props) {
   const { race, startRace, resetRace, handleCarFinished } = useRace();
-
   const { paginatedData, currentPage, pageCount, setNextPage, setPrevPage } =
     usePagination(cars);
 
