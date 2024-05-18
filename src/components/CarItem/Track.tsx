@@ -15,25 +15,24 @@ type Props = {
 };
 
 export default function Track({ car, animation, onUpdate, onComplete }: Props) {
-  const containerClass = classNames(
-    'border-t-2 border-b-2 relative pl-1 border-l-2',
-  );
+  const containerClass = classNames('relative pl-1');
 
   return (
     <div style={{ width: `${TRACK_LENGTH + 60}px` }} className={containerClass}>
+      <div className="w-full h-0.5 bg-gradient-to-r from-blue-500 to-pink-600 absolute left-[0px] bottom-[6px]" />
       <motion.div
         animate={
           animation.isAnimating ? { x: TRACK_LENGTH } : { x: animation.x }
         }
         transition={
           animation.isAnimating
-            ? { duration: animation.duration, ease: 'linear' }
+            ? { duration: animation.duration, ease: 'easeInOut' }
             : { duration: 0 }
         }
         onUpdate={onUpdate}
         onAnimationComplete={onComplete}
       >
-        <PiCarProfileFill color={car.color} size={60} className="z-10" />
+        <PiCarProfileFill color={car.color} size={80} className="z-10" />
       </motion.div>
       <CarInfo car={car} />
     </div>
