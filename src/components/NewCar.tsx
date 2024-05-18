@@ -1,14 +1,16 @@
 import { useState } from 'react';
-import { Plus } from 'react-feather';
 import CarForm from './CarForm.tsx';
 import { createCar } from '../utils/api.ts';
 import useModal from '../hooks/useModal.tsx';
+import TextButton from './ui/TextButton.tsx';
+import { Cars } from '../types/types.ts';
 
 type Props = {
   onCarsUpdate: () => void;
+  cars: Cars;
 };
 
-export default function NewCar({ onCarsUpdate }: Props) {
+export default function NewCar({ cars, onCarsUpdate }: Props) {
   const { open, toggleModal } = useModal();
   const [error, setError] = useState(false);
 
@@ -28,15 +30,13 @@ export default function NewCar({ onCarsUpdate }: Props) {
   };
 
   return (
-    <>
-      <button
-        onClick={toggleModal}
-        className="flex gap-1 relative px-3 py-2 rounded-sm hover:bg-rose-900 bg-rose-800 text-white mb-3 mt-2 mx-2 "
-        type="button"
-      >
-        <Plus />
-        <span>Add car</span>
-      </button>
+    <div className="relative">
+      <div className="flex flex-col gap-1 items-center">
+        <p className="text-base font-bold">{`${cars.length} cars`}</p>
+        <TextButton onClick={toggleModal} className=" text-md px-2 py-[4px]">
+          Add car
+        </TextButton>
+      </div>
       {open && (
         <div className="absolute">
           <CarForm
@@ -47,6 +47,6 @@ export default function NewCar({ onCarsUpdate }: Props) {
           />
         </div>
       )}
-    </>
+    </div>
   );
 }

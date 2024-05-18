@@ -1,6 +1,7 @@
 import randomColor from 'randomcolor';
 import { createCar } from '../utils/api.ts';
 import config from '../data/config.ts';
+import TextButton from './ui/TextButton.tsx';
 
 const { RANDOM_CARS_QUANTITY } = config;
 
@@ -32,12 +33,11 @@ export default function GenerateCars({ onCarsUpdate }: Props) {
   };
 
   return (
-    <button
-      className="flex gap-1 relative px-3 py-2 rounded-sm hover:bg-rose-900 bg-rose-800 text-white mb-3 mt-2 mx-2"
+    <TextButton
+      className="text-sm px-2 py-[3px] bg-pink-600"
       onClick={generateCars}
-      type="button"
     >
-      {`Create ${RANDOM_CARS_QUANTITY} random cars`}
-    </button>
+      Generate cars
+    </TextButton>
   );
 }
