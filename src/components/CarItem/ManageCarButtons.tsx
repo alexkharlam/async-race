@@ -1,9 +1,10 @@
+import { Edit2, Trash } from 'react-feather';
 import { useState } from 'react';
 import { Car } from '../../types/types.ts';
 import { deleteCar, updateCar } from '../../utils/api.ts';
-import TrackButton from './TrackButton.tsx';
 import useModal from '../../hooks/useModal.tsx';
 import CarForm from '../CarForm.tsx';
+import IconButton from '../ui/IconButton.tsx';
 
 type Props = {
   car: Car;
@@ -36,16 +37,16 @@ export default function ManageCarButtons({ car, onUpdate }: Props) {
   };
 
   return (
-    <div className="flex gap-0.5 flex-col">
-      <TrackButton
-        classname="bg-amber-600"
+    <div className="flex relative items-center gap-0.5 flex-col">
+      <IconButton
+        ButtonIcon={Edit2}
         onClick={toggleModal}
         disabled={false}
-      >
-        EDIT
-      </TrackButton>
+        classname="bg-amber-600"
+      />
+
       {open && (
-        <div className="absolute">
+        <div className="absolute left-1">
           <CarForm
             initialColor={car.color}
             error={error}
@@ -54,13 +55,12 @@ export default function ManageCarButtons({ car, onUpdate }: Props) {
           />
         </div>
       )}
-      <TrackButton
-        classname="bg-rose-800"
+      <IconButton
+        ButtonIcon={Trash}
         onClick={handleDelete}
         disabled={false}
-      >
-        DELETE
-      </TrackButton>
+        classname="bg-pink-600"
+      />
     </div>
   );
 }

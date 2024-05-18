@@ -15,7 +15,7 @@ export default function IconButton({
   classname,
 }: Props) {
   const btnClass = classNames(
-    'disabled:bg-gray-600 rounded-sm p-1.5',
+    'disabled:bg-gray-600 rounded-sm p-1.5 hover:scale-105 transition-transform duration-150',
     classname,
   );
 

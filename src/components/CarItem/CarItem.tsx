@@ -28,7 +28,7 @@ export default function CarItem({ car, onUpdate, race, onFinish }: Props) {
   }, [race, handleStart, handleStop]);
 
   return (
-    <div className="mb-2">
+    <div className="mb-3">
       <div className="flex gap-1 relative items-center mb-2">
         <ManageCarButtons onUpdate={onUpdate} car={car} />
         <MoveButtons
