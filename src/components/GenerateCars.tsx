@@ -34,7 +34,7 @@ export default function GenerateCars({ onCarsUpdate }: Props) {
 
   return (
     <TextButton
-      className="text-sm px-2 py-[3px] bg-pink-600"
+      className="text-sm px-2 py-[3px] bg-pink-600 justify-self-end"
       onClick={generateCars}
     >
       Generate cars

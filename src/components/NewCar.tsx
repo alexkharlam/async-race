@@ -30,7 +30,7 @@ export default function NewCar({ cars, onCarsUpdate }: Props) {
   };
 
   return (
-    <div className="relative">
+    <div className="relative justify-self-start">
       <div className="flex flex-col gap-1 items-center">
         <p className="text-base font-bold">{`${cars.length} cars`}</p>
         <TextButton onClick={toggleModal} className=" text-md px-2 py-[4px]">

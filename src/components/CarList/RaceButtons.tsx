@@ -9,7 +9,7 @@ type Props = {
 
 export default function RaceButtons({ race, onStartRace, onReset }: Props) {
   return (
-    <div className="my-2 flex gap-2">
+    <div className="order-3 md:order-none col-span-full md:col-span-1 flex gap-2 justify-self-center">
       <TextButton
         disabled={race.isRacing || !race.isResetted}
         onClick={onStartRace}

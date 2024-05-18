@@ -19,7 +19,7 @@ export default function CarList({ cars, onUpdate }: Props) {
 
   return (
     <div className="p-2">
-      <div className="flex items-center justify-between mb-3.5">
+      <div className="grid md:grid-cols-3 grid-cols-2 grid-rows-2 md:grid-rows-1 items-center mt-2 mb-3.5 gap-y-3 md:gap-y-[0px]">
         <NewCar cars={cars} onCarsUpdate={onUpdate} />
         <RaceButtons race={race} onReset={resetRace} onStartRace={startRace} />
         <GenerateCars onCarsUpdate={onUpdate} />
