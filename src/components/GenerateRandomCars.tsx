@@ -5,15 +5,15 @@ import config from '../data/config.ts';
 const { RANDOM_CARS_QUANTITY } = config;
 
 type Props = {
-  onNewCars: () => void;
+  onCarsUpdate: () => void;
 };
 
-export default function GenerateRandomCars({ onNewCars }: Props) {
+export default function GenerateRandomCars({ onCarsUpdate }: Props) {
   const requestCreateCar = async (color: string, name: string) => {
     try {
       await createCar(color, name);
     } catch (err) {
-      console.log('error happened');
+      console.log('error happened'); // TODO: error handling
     }
   };
 
@@ -28,10 +28,7 @@ export default function GenerateRandomCars({ onNewCars }: Props) {
     }
 
     await Promise.all(promises);
-    console.log('All cars created');
-    onNewCars();
-
-    // Here I want to do something after all 100 requests done
+    onCarsUpdate();
   };
 
   return (

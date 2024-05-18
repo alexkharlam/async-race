@@ -5,10 +5,10 @@ import { createCar } from '../utils/api.ts';
 import useModal from '../hooks/useModal.tsx';
 
 type Props = {
-  onNewCar: () => void;
+  onCarsUpdate: () => void;
 };
 
-export default function NewCarButton({ onNewCar }: Props) {
+export default function NewCarButton({ onCarsUpdate }: Props) {
   const { open, toggleModal } = useModal();
   const [error, setError] = useState(false);
 
@@ -19,7 +19,7 @@ export default function NewCarButton({ onNewCar }: Props) {
       const res = await createCar(color, name);
 
       if (res.status === 201) {
-        onNewCar();
+        onCarsUpdate();
         toggleModal();
       }
     } catch (err) {

@@ -8,22 +8,24 @@ import GenerateRandomCars from './GenerateRandomCars.tsx';
 export default function CarListContainer() {
   const [cars, setCars] = useState<Cars>();
 
-  const initCars = async () => {
+  const initCarsList = async () => {
     const { data } = await getCars();
     setCars(data);
   };
 
   useEffect(() => {
-    initCars();
+    initCarsList();
   }, []);
 
   return (
     <>
       <div className="flex gap-1">
-        <NewCarButton onNewCar={initCars} />
-        <GenerateRandomCars onNewCars={initCars} />
+        <NewCarButton onCarsUpdate={initCarsList} />
+        <GenerateRandomCars onCarsUpdate={initCarsList} />
       </div>
-      {cars && cars.length > 0 && <CarList onUpdate={initCars} cars={cars} />}
+      {cars && cars.length > 0 && (
+        <CarList onUpdate={initCarsList} cars={cars} />
+      )}
     </>
   );
 }
