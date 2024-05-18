@@ -19,13 +19,11 @@ export default function CarList({ cars, onUpdate }: Props) {
 
   return (
     <div className="p-2">
-      <p className="text-base mb-3">{`You have ${cars.length} cars!`}</p>
-      {race.winner && (
-        <p className="text-center text-3xl font-bold">{`Winner is ${race.winner.name}!`}</p>
-      )}
-      <NewCar onCarsUpdate={onUpdate} />
-      <GenerateCars onCarsUpdate={onUpdate} />
-      <RaceButtons race={race} onReset={resetRace} onStartRace={startRace} />
+      <div className="flex items-center justify-between mb-3.5">
+        <NewCar cars={cars} onCarsUpdate={onUpdate} />
+        <RaceButtons race={race} onReset={resetRace} onStartRace={startRace} />
+        <GenerateCars onCarsUpdate={onUpdate} />
+      </div>
 
       {paginatedData.map((car) => (
         <CarItem
@@ -44,6 +42,9 @@ export default function CarList({ cars, onUpdate }: Props) {
           setPrevPage={setPrevPage}
         />
       </div>
+      {race.winner && (
+        <p className="text-center text-3xl font-bold">{`Winner is ${race.winner.name}!`}</p>
+      )}
     </div>
   );
 }
