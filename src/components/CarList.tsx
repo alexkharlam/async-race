@@ -14,7 +14,7 @@ export default function CarList({ cars, onUpdate }: Props) {
   const [race, setRace] = useState<Race>({
     isRacing: false,
     winner: null,
-    isResetted: false,
+    isResetted: true,
   });
 
   const { paginatedData, currentPage, pageCount, setNextPage, setPrevPage } =
