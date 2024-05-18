@@ -1,6 +1,5 @@
 export type Car = { name: string; key: number; id: number; color: string };
 export type Cars = [Car];
-export type CarStatus = 'ready' | 'finished' | 'broken' | 'running';
 export type AnimationState = {
   isAnimating: boolean;
   isStopped: boolean;
@@ -9,4 +8,9 @@ export type AnimationState = {
   broken: boolean;
   finished: boolean;
   duration: number;
+};
+export type Race = {
+  isRacing: boolean;
+  winner: null | { name: string; id: number };
+  isResetted: boolean;
 };
