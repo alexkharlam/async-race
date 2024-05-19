@@ -2,6 +2,7 @@ import randomColor from 'randomcolor';
 import { createCar } from '../utils/api.ts';
 import config from '../data/config.ts';
 import TextButton from './ui/TextButton.tsx';
+import createCarName from '../utils/createCarName.ts';
 
 const { RANDOM_CARS_QUANTITY } = config;
 
@@ -23,7 +24,7 @@ export default function GenerateCars({ onCarsUpdate }: Props) {
 
     for (let i = 0; i < RANDOM_CARS_QUANTITY; i += 1) {
       const color = randomColor();
-      const name = `Car #${i + 1}`;
+      const name = createCarName();
 
       promises.push(requestCreateCar(color, name));
     }
