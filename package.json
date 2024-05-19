@@ -12,6 +12,10 @@
     "ci:format": "prettier --check \"src/**/*.ts\" \"src/**/*.tsx\""
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/material": "^5.15.18",
+    "@mui/x-data-grid": "^7.5.0",
     "@vitejs/plugin-react": "^4.2.1",
     "animejs": "^3.2.2",
     "axios": "^1.6.8",
