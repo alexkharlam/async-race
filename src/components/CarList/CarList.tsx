@@ -6,6 +6,7 @@ import RaceButtons from './RaceButtons.tsx';
 import useRace from '../../hooks/useRace.tsx';
 import NewCar from '../NewCar.tsx';
 import GenerateCars from '../GenerateCars.tsx';
+import WinnerMessage from '../WinnerMessage.tsx';
 
 type Props = {
   cars: Cars;
@@ -18,7 +19,7 @@ export default function CarList({ cars, onUpdate }: Props) {
     usePagination(cars);
 
   return (
-    <div className="p-2">
+    <div className="p-2 relative">
       <div className="grid md:grid-cols-3 grid-cols-2 grid-rows-2 md:grid-rows-1 items-center mt-2 mb-3.5 gap-y-3 md:gap-y-[0px]">
         <NewCar cars={cars} onCarsUpdate={onUpdate} />
         <RaceButtons race={race} onReset={resetRace} onStartRace={startRace} />
@@ -42,9 +43,7 @@ export default function CarList({ cars, onUpdate }: Props) {
           setPrevPage={setPrevPage}
         />
       </div>
-      {race.winner && (
-        <p className="text-center text-3xl font-bold">{`Winner is ${race.winner.name}!`}</p>
-      )}
+      {race.winner && <WinnerMessage name={race.winner.name} />}
     </div>
   );
 }

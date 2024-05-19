@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Race } from '../types/types.ts';
+import { Race, WinnerData } from '../types/types.ts';
+import { createUpdateWinner } from '../utils/api.ts';
 
 function useRace() {
   const [race, setRace] = useState<Race>({
@@ -20,12 +21,16 @@ function useRace() {
     });
   };
 
-  const handleCarFinished = (name: string, id: number) => {
+  const handleCarFinished = async (winner: WinnerData) => {
     if (!race.isRacing) return;
+
+    // Request to add winner
+    await createUpdateWinner(winner);
+
     setRace((prevState) => ({
       ...prevState,
       isRacing: false,
-      winner: { name, id },
+      winner: { name: winner.name, id: winner.id },
     }));
   };
 

@@ -1,11 +1,11 @@
 import { useCallback, useState } from 'react';
 import axios from 'axios';
 import config from '../data/config.ts';
-import { AnimationState, Car } from '../types/types.ts';
+import { AnimationState, Car, WinnerData } from '../types/types.ts';
 
 const { BASE_URL } = config;
 
-function useAnimation(car: Car, onFinish: (name: string, id: number) => void) {
+function useAnimation(car: Car, onFinish: (winner: WinnerData) => void) {
   const [animation, setAnimation] = useState<AnimationState>({
     isAnimating: false,
     isStopped: true,
@@ -74,8 +74,8 @@ function useAnimation(car: Car, onFinish: (name: string, id: number) => void) {
       ...prevState,
       finished: true,
     }));
-    onFinish(car.name, car.id);
-  }, [animation.isAnimating, car.id, car.name, onFinish]);
+    onFinish({ name: car.name, id: car.id, duration: animation.duration });
+  }, [animation.isAnimating, car.id, car.name, onFinish, animation.duration]);
 
   return { handleStart, animation, handleStop, handleUpdate, handleFinish };
 }
