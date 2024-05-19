@@ -101,7 +101,7 @@ export const createUpdateWinner = async (winner: NewWinner) => {
 
     if (err.response?.status === 404) {
       await createWinner(winner);
-\    }
+    }
   }
 };
 
