@@ -1,7 +1,7 @@
 import { Home, Star } from 'react-feather';
 import { useLocation } from 'react-router-dom';
 import routerPaths from '../../data/routerPaths.ts';
-import appLogo from '../../assets/app-logo.png';
+import appLogo from '../../assets/app-logo.svg';
 import NavLink from '../ui/NavLink.tsx';
 
 export default function Header() {
