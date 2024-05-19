@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import randomColor from 'randomcolor';
 import { createCar } from '../utils/api.ts';
 import config from '../data/config.ts';
@@ -13,9 +14,10 @@ type Props = {
 export default function GenerateCars({ onCarsUpdate }: Props) {
   const requestCreateCar = async (color: string, name: string) => {
     try {
+      throw new Error('sdf');
       await createCar(color, name);
     } catch (err) {
-      console.log('error happened'); // TODO: error handling
+      toast.error('Failed to generate cars', { toastId: 'generateError' });
     }
   };
 

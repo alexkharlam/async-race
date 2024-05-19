@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import { Edit2, Trash } from 'react-feather';
 import { useState } from 'react';
 import { Car } from '../../types/types.ts';
@@ -23,7 +24,7 @@ export default function ManageCarButtons({ car, onUpdate }: Props) {
       toggleModal();
       onUpdate();
     } catch (err) {
-      setError(true);
+      toast.error('Failed to update a car', { toastId: 'updateCarError' });
     }
   };
 
@@ -32,7 +33,7 @@ export default function ManageCarButtons({ car, onUpdate }: Props) {
       await deleteCar(car.id);
       onUpdate();
     } catch (err) {
-      console.log('error deleting car');
+      toast.error('Failed to delete a car', { toastId: 'deleteCarError' });
     }
   };
 
