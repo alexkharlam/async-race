@@ -52,7 +52,7 @@ export default function CarForm({
       <input
         onChange={handleChange}
         id="name"
-        className="w-full px-1 py-2"
+        className="w-full px-1 py-2 text-black"
         placeholder="Car name"
       />
       <ChromePicker color={color} onChange={handleChangeColor} />
