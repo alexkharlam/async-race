@@ -9,12 +9,7 @@ type Props = {
   initialColor: string;
 };
 
-export default function CarForm({
-  onClose,
-  onSubmit,
-  error,
-  initialColor,
-}: Props) {
+export default function CarForm({ onClose, onSubmit, error, initialColor }: Props) {
   const [name, setName] = useState('');
   const [color, setColor] = useState(initialColor);
   const handleChangeColor = (newColor: ColorResult) => {
@@ -44,11 +39,7 @@ export default function CarForm({
       >
         <X />
       </button>
-      {error && (
-        <p className="bg-white p-1 text-red-500">
-          Error creating car. Try again!
-        </p>
-      )}
+      {error && <p className="bg-white p-1 text-red-500">Error creating car. Try again!</p>}
       <input
         onChange={handleChange}
         id="name"

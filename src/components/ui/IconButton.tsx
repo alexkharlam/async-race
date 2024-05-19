@@ -8,24 +8,14 @@ type Props = {
   classname: string;
 };
 
-export default function IconButton({
-  ButtonIcon,
-  disabled,
-  onClick,
-  classname,
-}: Props) {
+export default function IconButton({ ButtonIcon, disabled, onClick, classname }: Props) {
   const btnClass = classNames(
     'disabled:bg-gray-600 rounded-sm p-1.5 hover:scale-105 transition-transform duration-150',
     classname,
   );
 
   return (
-    <button
-      onClick={onClick}
-      disabled={disabled}
-      className={btnClass}
-      type="button"
-    >
+    <button onClick={onClick} disabled={disabled} className={btnClass} type="button">
       <ButtonIcon color="white" fill="white" size={20} />
     </button>
   );

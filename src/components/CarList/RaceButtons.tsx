@@ -10,10 +10,7 @@ type Props = {
 export default function RaceButtons({ race, onStartRace, onReset }: Props) {
   return (
     <div className="order-3 md:order-none col-span-full md:col-span-1 flex gap-2 justify-self-center">
-      <TextButton
-        disabled={race.isRacing || !race.isResetted}
-        onClick={onStartRace}
-      >
+      <TextButton disabled={race.isRacing || !race.isResetted} onClick={onStartRace}>
         start race
       </TextButton>
       <TextButton disabled={race.isResetted || race.isRacing} onClick={onReset}>

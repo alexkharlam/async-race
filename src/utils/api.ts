@@ -74,11 +74,7 @@ const createWinner = async (winner: NewWinner) => {
   return res;
 };
 
-const updateWinner = async (
-  winner: NewWinner,
-  oldBestTime: number,
-  oldWins: number,
-) => {
+const updateWinner = async (winner: NewWinner, oldBestTime: number, oldWins: number) => {
   const newTime = winner.duration < oldBestTime ? winner.duration : oldBestTime;
 
   const res = await axios.put(`${BASE_URL}/winners/${winner.id}`, {

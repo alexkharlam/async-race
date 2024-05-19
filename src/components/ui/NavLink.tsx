@@ -13,12 +13,9 @@ type Props = {
 export default function NavLink({ to, children, LinkIcon, pathname }: Props) {
   const isActivePath = pathname === to;
 
-  const linkClass = classNames(
-    'flex gap-1.5 items-center transition-all duration-100',
-    {
-      'opacity-60 hover:text-blue-primary': !isActivePath,
-    },
-  );
+  const linkClass = classNames('flex gap-1.5 items-center transition-all duration-100', {
+    'opacity-60 hover:text-blue-primary': !isActivePath,
+  });
 
   return (
     <Link className={linkClass} to={to}>

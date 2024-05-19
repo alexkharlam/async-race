@@ -10,13 +10,7 @@ type Props = {
   pathname: string;
 };
 
-export default function ImgNavLink({
-  to,
-  imgSrc,
-  imgAlt,
-  children,
-  pathname,
-}: Props) {
+export default function ImgNavLink({ to, imgSrc, imgAlt, children, pathname }: Props) {
   const isActivePath = pathname === to;
 
   const linkClass = classNames(

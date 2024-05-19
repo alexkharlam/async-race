@@ -18,9 +18,7 @@ function useAnimation(car: Car, onFinish: (winner: NewWinner) => void) {
 
   const handleStart = useCallback(async () => {
     try {
-      const { data } = await axios.patch(
-        `${BASE_URL}/engine/?id=${car.id}&status=started`,
-      );
+      const { data } = await axios.patch(`${BASE_URL}/engine/?id=${car.id}&status=started`);
       const dataDuration = data.distance / data.velocity;
 
       setAnimation((prevState) => ({

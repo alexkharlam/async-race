@@ -9,8 +9,7 @@ type Props = {
 };
 
 export default function MoveButtons({ animation, onStart, onStop }: Props) {
-  const isStartDisabled =
-    animation.isAnimating || (!animation.isStopped && !animation.isPaused);
+  const isStartDisabled = animation.isAnimating || (!animation.isStopped && !animation.isPaused);
 
   const isStopDisabled = animation.isStopped;
 

@@ -14,8 +14,10 @@ type Props = {
 };
 
 export default function CarItem({ car, onUpdate, race, onFinish }: Props) {
-  const { animation, handleFinish, handleStart, handleStop, handleUpdate } =
-    useAnimation(car, onFinish);
+  const { animation, handleFinish, handleStart, handleStop, handleUpdate } = useAnimation(
+    car,
+    onFinish,
+  );
 
   useEffect(() => {
     if (race.isResetted) {
@@ -31,17 +33,8 @@ export default function CarItem({ car, onUpdate, race, onFinish }: Props) {
     <div className="mb-3">
       <div className="flex gap-1 relative items-center mb-2">
         <ManageCarButtons onUpdate={onUpdate} car={car} />
-        <MoveButtons
-          animation={animation}
-          onStart={handleStart}
-          onStop={handleStop}
-        />
-        <Track
-          animation={animation}
-          onComplete={handleFinish}
-          onUpdate={handleUpdate}
-          car={car}
-        />
+        <MoveButtons animation={animation} onStart={handleStart} onStop={handleStop} />
+        <Track animation={animation} onComplete={handleFinish} onUpdate={handleUpdate} car={car} />
         <StatusMessage animation={animation} />
       </div>
     </div>
