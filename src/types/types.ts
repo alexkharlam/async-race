@@ -14,3 +14,8 @@ export type Race = {
   winner: null | { name: string; id: number };
   isResetted: boolean;
 };
+export type WinnerData = {
+  name: string;
+  id: number;
+  duration: number;
+};
