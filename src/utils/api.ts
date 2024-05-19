@@ -1,17 +1,24 @@
 import axios from 'axios';
-import { WinnerData } from '../types/types.ts';
+import {
+  Car,
+  Cars,
+  NewWinner,
+  WinnerData,
+  WinnerWithCarData,
+  WinnersData,
+} from '../types/types.ts';
 
 const BASE_URL = 'http://127.0.0.1:3000';
 
 // Cars
-export const getCars = async () => {
-  const res = await axios.get(`${BASE_URL}/garage`);
+export const getCars = async (): Promise<Cars> => {
+  const res = await axios.get<Cars>(`${BASE_URL}/garage`);
 
-  return res;
+  return res.data;
 };
 
-export const getCar = async (carId: string) => {
-  const res = await axios.get(`${BASE_URL}/garage/${carId}`);
+export const getCar = async (carId: number): Promise<Car> => {
+  const res = await axios.get<Car>(`${BASE_URL}/garage/${carId}`);
 
   return res.data;
 };
@@ -23,6 +30,7 @@ export const createCar = async (color: string, name: string) => {
 };
 
 export const deleteCar = async (carId: number) => {
+  await axios.delete(`${BASE_URL}/winners/${carId}`);
   const res = await axios.delete(`${BASE_URL}/garage/${carId}`);
 
   return res.data;
@@ -44,10 +52,10 @@ export const requestRace = async (carId: string, status: string) => {
 };
 
 // WINNERS
-export const getWinners = async () => {
-  const res = await axios.get(`${BASE_URL}/winners`);
+export const getWinners = async (): Promise<WinnersData> => {
+  const res = await axios.get<WinnersData>(`${BASE_URL}/winners`);
 
-  return res;
+  return res.data;
 };
 
 const getWinner = async (carId: number) => {
@@ -56,7 +64,7 @@ const getWinner = async (carId: number) => {
   return res;
 };
 
-const createWinner = async (winner: WinnerData) => {
+const createWinner = async (winner: NewWinner) => {
   const res = await axios.post(`${BASE_URL}/winners`, {
     id: winner.id,
     wins: 1,
@@ -67,7 +75,7 @@ const createWinner = async (winner: WinnerData) => {
 };
 
 const updateWinner = async (
-  winner: WinnerData,
+  winner: NewWinner,
   oldBestTime: number,
   oldWins: number,
 ) => {
@@ -81,7 +89,7 @@ const updateWinner = async (
   return res;
 };
 
-export const createUpdateWinner = async (winner: WinnerData) => {
+export const createUpdateWinner = async (winner: NewWinner) => {
   try {
     const res = await getWinner(winner.id);
 
@@ -89,13 +97,28 @@ export const createUpdateWinner = async (winner: WinnerData) => {
 
     await updateWinner(winner, oldBestTime, oldWins);
   } catch (err) {
-    if (!axios.isAxiosError(err)) {
-      console.error(err);
-      return;
-    }
+    if (!axios.isAxiosError(err)) return;
 
     if (err.response?.status === 404) {
       await createWinner(winner);
-    }
+\    }
   }
+};
+
+export const getWinnersWithCarData = async (): Promise<WinnerWithCarData[]> => {
+  const winners = await getWinners();
+
+  const carRequests = winners.map((winner) => getCar(winner.id));
+
+  const carResponses = await Promise.all(carRequests);
+
+  const winnersWithCarNames: WinnerWithCarData[] = winners.map(
+    (winner: WinnerData, index: number) => ({
+      ...winner,
+      name: carResponses[index].name,
+      color: carResponses[index].color,
+    }),
+  );
+
+  return winnersWithCarNames;
 };
