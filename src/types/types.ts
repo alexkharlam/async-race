@@ -1,5 +1,5 @@
 export type Car = { name: string; key: number; id: number; color: string };
-export type Cars = [Car];
+export type Cars = Car[];
 export type AnimationState = {
   isAnimating: boolean;
   isStopped: boolean;
@@ -14,8 +14,24 @@ export type Race = {
   winner: null | { name: string; id: number };
   isResetted: boolean;
 };
-export type WinnerData = {
+export type NewWinner = {
   name: string;
   id: number;
   duration: number;
+};
+
+export type WinnerData = {
+  wins: number;
+  time: number;
+  id: number;
+};
+
+export type WinnersData = WinnerData[];
+
+export type WinnerWithCarData = {
+  name: string;
+  color: string;
+  wins: number;
+  time: number;
+  id: number;
 };

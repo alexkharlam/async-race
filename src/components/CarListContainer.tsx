@@ -7,8 +7,8 @@ export default function CarListContainer() {
   const [cars, setCars] = useState<Cars>();
 
   const initCarsList = async () => {
-    const { data } = await getCars();
-    setCars(data);
+    const carsData = await getCars();
+    setCars(carsData);
   };
 
   useEffect(() => {
