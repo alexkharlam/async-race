@@ -24,7 +24,6 @@ function useRace() {
   const handleCarFinished = async (winner: NewWinner) => {
     if (!race.isRacing) return;
 
-    // Request to add winner
     await createUpdateWinner(winner);
 
     setRace((prevState) => ({

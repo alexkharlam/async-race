@@ -1,4 +1,4 @@
-import { Cars } from '../../types/types.ts';
+import { Car } from '../../types/types.ts';
 import usePagination from '../../hooks/usePagination.tsx';
 import PaginationButtons from '../ui/PaginationButtons.tsx';
 import CarItem from '../CarItem/CarItem.tsx';
@@ -9,7 +9,7 @@ import GenerateCars from '../GenerateCars.tsx';
 import WinnerMessage from '../WinnerMessage.tsx';
 
 type Props = {
-  cars: Cars;
+  cars: Car[];
   onUpdate: () => void;
 };
 

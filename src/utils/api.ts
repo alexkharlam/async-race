@@ -1,12 +1,5 @@
 import axios from 'axios';
-import {
-  Car,
-  Cars,
-  NewWinner,
-  WinnerData,
-  WinnerWithCarData,
-  WinnersData,
-} from '../types/types.ts';
+import { Car, NewWinner, WinnerData, WinnerWithCarData, WinnersData } from '../types/types.ts';
 
 const BASE_URL = 'http://127.0.0.1:3000';
 
@@ -17,8 +10,8 @@ const getWinner = async (carId: number) => {
 };
 
 // Cars
-export const getCars = async (): Promise<Cars> => {
-  const res = await axios.get<Cars>(`${BASE_URL}/garage`);
+export const getCars = async (): Promise<Car[]> => {
+  const res = await axios.get<Car[]>(`${BASE_URL}/garage`);
 
   return res.data;
 };
@@ -131,4 +124,5 @@ export default {
   updateCar,
   deleteCar,
   createCar,
+  getCars,
 };

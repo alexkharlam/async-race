@@ -1,20 +1,31 @@
+import { useCallback } from 'react';
 import { toast } from 'react-toastify';
 import randomColor from 'randomcolor';
 import config from '../data/config.ts';
 import createCarName from '../utils/createCarName.ts';
 import api from '../utils/api.ts';
+import toastErrors from '../data/toastErrors.ts';
 
 const { RANDOM_CARS_QUANTITY } = config;
 
-const toastErrors = {
-  updateCar: { text: 'Failed to update car', id: 'updateCarError' },
-  deleteCar: { text: 'Failed to delete car', id: 'deleteCarError' },
-  createCar: { text: 'Failed to create car', id: 'createCarError' },
-  generateCars: { text: 'Failed to generate cars', id: 'generateCarsError' },
-};
+function useCarOperations() {
+  const getCars = useCallback(async () => {
+    try {
+      const cars = await api.getCars();
 
-function useCarOperations(onCarUpdate: () => void) {
-  const createCar = async (name: string, color: string, toggleModal: () => void) => {
+      return cars;
+    } catch (err) {
+      toast.error(toastErrors.getCars.text, { toastId: toastErrors.getCars.id });
+      return [];
+    }
+  }, []);
+
+  const createCar = async (
+    name: string,
+    color: string,
+    toggleModal: () => void,
+    onCarUpdate: () => void,
+  ) => {
     try {
       await api.createCar(color, name);
 
@@ -25,7 +36,13 @@ function useCarOperations(onCarUpdate: () => void) {
     }
   };
 
-  const updateCar = async (carId: number, name: string, color: string, toggleModal: () => void) => {
+  const updateCar = async (
+    carId: number,
+    name: string,
+    color: string,
+    toggleModal: () => void,
+    onCarUpdate: () => void,
+  ) => {
     try {
       await api.updateCar(carId, color, name);
       toggleModal();
@@ -35,7 +52,7 @@ function useCarOperations(onCarUpdate: () => void) {
     }
   };
 
-  const deleteCar = async (carId: number) => {
+  const deleteCar = async (carId: number, onCarUpdate: () => void) => {
     try {
       await api.deleteCar(carId);
       onCarUpdate();
@@ -44,7 +61,7 @@ function useCarOperations(onCarUpdate: () => void) {
     }
   };
 
-  const generateCars = async () => {
+  const generateCars = async (onCarUpdate: () => void) => {
     try {
       const promises = [];
 
@@ -62,7 +79,7 @@ function useCarOperations(onCarUpdate: () => void) {
     }
   };
 
-  return { updateCar, deleteCar, createCar, generateCars };
+  return { updateCar, deleteCar, createCar, generateCars, getCars };
 }
 
 export default useCarOperations;

@@ -1,5 +1,4 @@
-export type Car = { name: string; key: number; id: number; color: string };
-export type Cars = Car[];
+export type Car = { name: string; id: number; color: string };
 export type AnimationState = {
   isAnimating: boolean;
   isStopped: boolean;

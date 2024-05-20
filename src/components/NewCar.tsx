@@ -1,19 +1,21 @@
 import CarForm from './CarForm.tsx';
 import useModal from '../hooks/useModal.tsx';
 import TextButton from './ui/TextButton.tsx';
-import { Cars } from '../types/types.ts';
+import { Car } from '../types/types.ts';
 import useCarOperations from '../hooks/useCarOperations.tsx';
 
 type Props = {
   onCarsUpdate: () => void;
-  cars: Cars;
+  cars: Car[];
 };
 
 export default function NewCar({ cars, onCarsUpdate }: Props) {
-  const { createCar } = useCarOperations(onCarsUpdate);
+  const { createCar } = useCarOperations();
   const { open, toggleModal } = useModal();
 
-  const handleSubmit = (name: string, color: string) => createCar(name, color, toggleModal);
+  const handleSubmit = (name: string, color: string) => {
+    createCar(name, color, toggleModal, onCarsUpdate);
+  };
 
   return (
     <div className="relative justify-self-start">

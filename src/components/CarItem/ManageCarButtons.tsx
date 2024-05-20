@@ -11,10 +11,12 @@ type Props = {
 };
 
 export default function ManageCarButtons({ car, onUpdate }: Props) {
-  const { updateCar, deleteCar } = useCarOperations(onUpdate);
+  const { updateCar, deleteCar } = useCarOperations();
   const { open, toggleModal } = useModal();
 
-  const handleSubmit = (name: string, color: string) => updateCar(car.id, name, color, toggleModal);
+  const handleSubmit = (name: string, color: string) => {
+    updateCar(car.id, name, color, toggleModal, onUpdate);
+  };
 
   return (
     <div className="flex relative items-center gap-0.5 flex-col">
@@ -37,7 +39,7 @@ export default function ManageCarButtons({ car, onUpdate }: Props) {
       )}
       <IconButton
         ButtonIcon={Trash}
-        onClick={() => deleteCar(car.id)}
+        onClick={() => deleteCar(car.id, onUpdate)}
         disabled={false}
         classname="bg-pink-600"
       />

@@ -1,21 +1,22 @@
-import { useEffect, useState } from 'react';
-import { Cars } from '../types/types.ts';
-import { getCars } from '../utils/api.ts';
+import { useCallback, useEffect, useState } from 'react';
+import { Car } from '../types/types.ts';
 import CarList from './CarList/CarList.tsx';
+import useCarOperations from '../hooks/useCarOperations.tsx';
 
 export default function CarListContainer() {
-  const [cars, setCars] = useState<Cars>();
+  const { getCars } = useCarOperations();
+  const [cars, setCars] = useState<Car[]>();
 
-  const initCarsList = async () => {
+  const updateCarsList = useCallback(async () => {
     const carsData = await getCars();
     setCars(carsData);
-  };
+  }, [getCars]);
 
   useEffect(() => {
-    initCarsList();
-  }, []);
+    updateCarsList();
+  }, [updateCarsList]);
 
   if (cars && cars.length > 0) {
-    return <CarList onUpdate={initCarsList} cars={cars} />;
+    return <CarList onUpdate={updateCarsList} cars={cars} />;
   }
 }
