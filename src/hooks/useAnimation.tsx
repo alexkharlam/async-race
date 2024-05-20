@@ -2,16 +2,18 @@ import { useCallback, useState } from 'react';
 import { AnimationState, Car, NewWinner } from '../types/types.ts';
 import api from '../utils/api.ts';
 
+const initialAnimationState = {
+  isAnimating: false,
+  isStopped: true,
+  isPaused: false,
+  x: 0,
+  broken: false,
+  finished: false,
+  duration: 0,
+};
+
 function useAnimation(car: Car, onFinish: (winner: NewWinner) => void) {
-  const [animation, setAnimation] = useState<AnimationState>({
-    isAnimating: false,
-    isStopped: true,
-    isPaused: false,
-    x: 0,
-    broken: false,
-    finished: false,
-    duration: 0,
-  });
+  const [animation, setAnimation] = useState<AnimationState>(initialAnimationState);
 
   const handleStart = useCallback(async () => {
     try {
@@ -43,15 +45,7 @@ function useAnimation(car: Car, onFinish: (winner: NewWinner) => void) {
   const handleStop = useCallback(async () => {
     await api.stopEngine(car.id);
 
-    setAnimation({
-      isAnimating: false,
-      isStopped: true,
-      isPaused: false,
-      x: 0,
-      broken: false,
-      finished: false,
-      duration: 0,
-    });
+    setAnimation(initialAnimationState);
   }, [car.id]);
 
   const handleUpdate = useCallback(
