@@ -4,9 +4,7 @@ import { PiCarProfileFill } from 'react-icons/pi';
 import classNames from 'classnames';
 import { AnimationState, Car } from '../../types/types.ts';
 import CarInfo from './CarInfo.tsx';
-import config from '../../data/config.ts';
-
-const { TRACK_LENGTH } = config;
+import { TRACK_LENGTH } from '../../data/config.ts';
 
 type Props = {
   car: Car;

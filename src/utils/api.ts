@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { Car, NewWinner, WinnerData, WinnerWithCarData, WinnersData } from '../types/types.ts';
-
-const BASE_URL = 'http://127.0.0.1:3000';
+import { BASE_URL } from '../data/config.ts';
 
 const getWinner = async (carId: number) => {
   const res = await axios.get(`${BASE_URL}/winners/${carId}`);

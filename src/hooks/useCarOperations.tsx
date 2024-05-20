@@ -1,12 +1,10 @@
 import { useCallback } from 'react';
 import { toast } from 'react-toastify';
 import randomColor from 'randomcolor';
-import config from '../data/config.ts';
+import { RANDOM_CARS_QUANTITY } from '../data/config.ts';
 import createCarName from '../utils/createCarName.ts';
 import api from '../utils/api.ts';
 import toastErrors from '../data/toastErrors.ts';
-
-const { RANDOM_CARS_QUANTITY } = config;
 
 function useCarOperations() {
   const getCars = useCallback(async () => {

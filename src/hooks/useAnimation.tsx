@@ -1,9 +1,7 @@
 import { useCallback, useState } from 'react';
 import axios from 'axios';
-import config from '../data/config.ts';
+import { BASE_URL } from '../data/config.ts';
 import { AnimationState, Car, NewWinner } from '../types/types.ts';
-
-const { BASE_URL } = config;
 
 function useAnimation(car: Car, onFinish: (winner: NewWinner) => void) {
   const [animation, setAnimation] = useState<AnimationState>({

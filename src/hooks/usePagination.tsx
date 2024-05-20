@@ -1,8 +1,6 @@
 import { useState } from 'react';
-import config from '../data/config.ts';
 import { Car } from '../types/types.ts';
-
-const { PAGE_LIMIT } = config;
+import { PAGE_LIMIT } from '../data/config.ts';
 
 function usePagination(items: Car[]) {
   const [currentPage, setCurrentPage] = useState(0);
