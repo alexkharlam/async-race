@@ -10,6 +10,12 @@ import {
 
 const BASE_URL = 'http://127.0.0.1:3000';
 
+const getWinner = async (carId: number) => {
+  const res = await axios.get(`${BASE_URL}/winners/${carId}`);
+
+  return res;
+};
+
 // Cars
 export const getCars = async (): Promise<Cars> => {
   const res = await axios.get<Cars>(`${BASE_URL}/garage`);
@@ -30,10 +36,18 @@ export const createCar = async (color: string, name: string) => {
 };
 
 export const deleteCar = async (carId: number) => {
-  await axios.delete(`${BASE_URL}/winners/${carId}`);
-  const res = await axios.delete(`${BASE_URL}/garage/${carId}`);
+  try {
+    await axios.delete(`${BASE_URL}/garage/${carId}`);
+    await getWinner(carId);
 
-  return res.data;
+    await axios.delete(`${BASE_URL}/winners/${carId}`);
+  } catch (err) {
+    if (!axios.isAxiosError(err)) return;
+
+    if (err.response?.status !== 404) {
+      throw new Error('Failed to delete a car');
+    }
+  }
 };
 
 export const updateCar = async (carId: number, color: string, name: string) => {
@@ -56,12 +70,6 @@ export const getWinners = async (): Promise<WinnersData> => {
   const res = await axios.get<WinnersData>(`${BASE_URL}/winners`);
 
   return res.data;
-};
-
-const getWinner = async (carId: number) => {
-  const res = await axios.get(`${BASE_URL}/winners/${carId}`);
-
-  return res;
 };
 
 const createWinner = async (winner: NewWinner) => {
