@@ -1,8 +1,8 @@
 import CarForm from './CarForm.tsx';
-import useModal from '../hooks/useModal.tsx';
-import TextButton from './ui/TextButton.tsx';
-import { Car } from '../types/types.ts';
-import useCarOperations from '../hooks/useCarOperations.tsx';
+import useModal from '../../hooks/useModal.tsx';
+import TextButton from '../ui/TextButton.tsx';
+import { Car } from '../../types/types.ts';
+import useCarOperations from '../../hooks/useCarOperations.tsx';
 
 type Props = {
   onCarsUpdate: () => void;

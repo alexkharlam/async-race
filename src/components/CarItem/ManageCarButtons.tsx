@@ -1,7 +1,7 @@
 import { Edit2, Trash } from 'react-feather';
 import { Car } from '../../types/types.ts';
 import useModal from '../../hooks/useModal.tsx';
-import CarForm from '../CarForm.tsx';
+import CarForm from '../CarList/CarForm.tsx';
 import IconButton from '../ui/IconButton.tsx';
 import useCarOperations from '../../hooks/useCarOperations.tsx';
 

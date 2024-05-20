@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import CarList from './CarList/CarList.tsx';
-import useCarList from '../hooks/useCarList.tsx';
+import CarList from './CarList.tsx';
+import useCarList from '../../hooks/useCarList.tsx';
 
 export default function CarListContainer() {
   const { cars, updateCarList } = useCarList();

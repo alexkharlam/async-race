@@ -4,9 +4,9 @@ import PaginationButtons from '../ui/PaginationButtons.tsx';
 import CarItem from '../CarItem/CarItem.tsx';
 import RaceButtons from './RaceButtons.tsx';
 import useRace from '../../hooks/useRace.tsx';
-import NewCar from '../NewCar.tsx';
-import GenerateCars from '../GenerateCars.tsx';
-import WinnerMessage from '../WinnerMessage.tsx';
+import NewCar from './NewCar.tsx';
+import GenerateCars from './GenerateCars.tsx';
+import WinnerMessage from './WinnerMessage.tsx';
 
 type Props = {
   cars: Car[];
