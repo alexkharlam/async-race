@@ -14,7 +14,6 @@ type Props = {
 export default function GenerateCars({ onCarsUpdate }: Props) {
   const requestCreateCar = async (color: string, name: string) => {
     try {
-      throw new Error('sdf');
       await createCar(color, name);
     } catch (err) {
       toast.error('Failed to generate cars', { toastId: 'generateError' });
