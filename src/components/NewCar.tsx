@@ -1,9 +1,8 @@
-import { useState } from 'react';
 import CarForm from './CarForm.tsx';
-import { createCar } from '../utils/api.ts';
 import useModal from '../hooks/useModal.tsx';
 import TextButton from './ui/TextButton.tsx';
 import { Cars } from '../types/types.ts';
+import useCarOperations from '../hooks/useCarOperations.tsx';
 
 type Props = {
   onCarsUpdate: () => void;
@@ -11,23 +10,10 @@ type Props = {
 };
 
 export default function NewCar({ cars, onCarsUpdate }: Props) {
+  const { createCar } = useCarOperations(onCarsUpdate);
   const { open, toggleModal } = useModal();
-  const [error, setError] = useState(false);
 
-  const handleCreateCar = async (name: string, color: string) => {
-    setError(false);
-
-    try {
-      const res = await createCar(color, name);
-
-      if (res.status === 201) {
-        onCarsUpdate();
-        toggleModal();
-      }
-    } catch (err) {
-      setError(true);
-    }
-  };
+  const handleSubmit = (name: string, color: string) => createCar(name, color, toggleModal);
 
   return (
     <div className="relative justify-self-start">
@@ -43,8 +29,7 @@ export default function NewCar({ cars, onCarsUpdate }: Props) {
             initialName=""
             initialColor="#333333"
             onClose={toggleModal}
-            error={error}
-            onSubmit={handleCreateCar}
+            onSubmit={handleSubmit}
           />
         </div>
       )}

@@ -1,38 +1,12 @@
-import { toast } from 'react-toastify';
-import randomColor from 'randomcolor';
-import { createCar } from '../utils/api.ts';
-import config from '../data/config.ts';
 import TextButton from './ui/TextButton.tsx';
-import createCarName from '../utils/createCarName.ts';
-
-const { RANDOM_CARS_QUANTITY } = config;
+import useCarOperations from '../hooks/useCarOperations.tsx';
 
 type Props = {
   onCarsUpdate: () => void;
 };
 
 export default function GenerateCars({ onCarsUpdate }: Props) {
-  const requestCreateCar = async (color: string, name: string) => {
-    try {
-      await createCar(color, name);
-    } catch (err) {
-      toast.error('Failed to generate cars', { toastId: 'generateError' });
-    }
-  };
-
-  const generateCars = async () => {
-    const promises = [];
-
-    for (let i = 0; i < RANDOM_CARS_QUANTITY; i += 1) {
-      const color = randomColor();
-      const name = createCarName();
-
-      promises.push(requestCreateCar(color, name));
-    }
-
-    await Promise.all(promises);
-    onCarsUpdate();
-  };
+  const { generateCars } = useCarOperations(onCarsUpdate);
 
   return (
     <TextButton

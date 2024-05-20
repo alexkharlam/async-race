@@ -126,3 +126,9 @@ export const getWinnersWithCarData = async (): Promise<WinnerWithCarData[]> => {
 
   return winnersWithCarNames;
 };
+
+export default {
+  updateCar,
+  deleteCar,
+  createCar,
+};

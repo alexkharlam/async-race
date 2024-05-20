@@ -1,11 +1,9 @@
-import { toast } from 'react-toastify';
 import { Edit2, Trash } from 'react-feather';
-import { useState } from 'react';
 import { Car } from '../../types/types.ts';
-import { deleteCar, updateCar } from '../../utils/api.ts';
 import useModal from '../../hooks/useModal.tsx';
 import CarForm from '../CarForm.tsx';
 import IconButton from '../ui/IconButton.tsx';
+import useCarOperations from '../../hooks/useCarOperations.tsx';
 
 type Props = {
   car: Car;
@@ -13,29 +11,10 @@ type Props = {
 };
 
 export default function ManageCarButtons({ car, onUpdate }: Props) {
+  const { updateCar, deleteCar } = useCarOperations(onUpdate);
   const { open, toggleModal } = useModal();
-  const [error, setError] = useState(false);
 
-  const handleUpdate = async (name: string, color: string) => {
-    setError(false);
-
-    try {
-      await updateCar(car.id, color, name);
-      toggleModal();
-      onUpdate();
-    } catch (err) {
-      toast.error('Failed to update a car', { toastId: 'updateCarError' });
-    }
-  };
-
-  const handleDelete = async () => {
-    try {
-      await deleteCar(car.id);
-      onUpdate();
-    } catch (err) {
-      toast.error('Failed to delete a car', { toastId: 'deleteCarError' });
-    }
-  };
+  const handleSubmit = (name: string, color: string) => updateCar(car.id, name, color, toggleModal);
 
   return (
     <div className="flex relative items-center gap-0.5 flex-col">
@@ -51,15 +30,14 @@ export default function ManageCarButtons({ car, onUpdate }: Props) {
           <CarForm
             initialName={car.name}
             initialColor={car.color}
-            error={error}
             onClose={toggleModal}
-            onSubmit={handleUpdate}
+            onSubmit={handleSubmit}
           />
         </div>
       )}
       <IconButton
         ButtonIcon={Trash}
-        onClick={handleDelete}
+        onClick={() => deleteCar(car.id)}
         disabled={false}
         classname="bg-pink-600"
       />
