@@ -41,6 +41,8 @@ function useAnimation(car: Car, onFinish: (winner: NewWinner) => void) {
   }, [car.id]);
 
   const handleStop = useCallback(async () => {
+    await api.stopEngine(car.id);
+
     setAnimation({
       isAnimating: false,
       isStopped: true,
@@ -50,7 +52,7 @@ function useAnimation(car: Car, onFinish: (winner: NewWinner) => void) {
       finished: false,
       duration: 0,
     });
-  }, []);
+  }, [car.id]);
 
   const handleUpdate = useCallback(
     (latest: { x: number }) => {
