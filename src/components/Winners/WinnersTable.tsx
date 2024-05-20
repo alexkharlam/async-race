@@ -8,7 +8,7 @@ type Props = {
 };
 
 const columns: GridColDef<WinnerWithCarData>[] = [
-  { field: 'id', headerName: 'ID', width: 90, sortable: false },
+  { field: 'id', headerName: '№', width: 90, sortable: false },
   {
     field: 'color',
     headerName: 'Car',
