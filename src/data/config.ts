@@ -1,5 +1,5 @@
-export const PAGE_LIMIT = 7;
-
+export const PAGE_LIMIT_CARS = 7;
+export const PAGE_LIMIT_WINNERS = 10;
 export const BASE_URL = 'http://127.0.0.1:3000';
 export const TRACK_LENGTH = window.innerWidth - 215;
 export const RANDOM_CARS_QUANTITY = 100;

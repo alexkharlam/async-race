@@ -1,6 +1,7 @@
 import { PiCarProfileFill } from 'react-icons/pi';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { WinnerWithCarData } from '../../types/types.ts';
+import { PAGE_LIMIT_WINNERS } from '../../data/config.ts';
 
 type Props = {
   winners: WinnerWithCarData[];
@@ -42,11 +43,11 @@ export default function WinnersTable({ winners }: Props) {
         initialState={{
           pagination: {
             paginationModel: {
-              pageSize: 10,
+              pageSize: PAGE_LIMIT_WINNERS,
             },
           },
         }}
-        pageSizeOptions={[10]}
+        pageSizeOptions={[PAGE_LIMIT_WINNERS]}
         disableRowSelectionOnClick
         disableColumnMenu
       />
