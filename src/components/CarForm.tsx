@@ -7,10 +7,11 @@ type Props = {
   onSubmit: (name: string, color: string) => void;
   error: boolean;
   initialColor: string;
+  initialName: string;
 };
 
-export default function CarForm({ onClose, onSubmit, error, initialColor }: Props) {
-  const [name, setName] = useState('');
+export default function CarForm({ onClose, onSubmit, error, initialColor, initialName }: Props) {
+  const [name, setName] = useState(initialName);
   const [color, setColor] = useState(initialColor);
   const handleChangeColor = (newColor: ColorResult) => {
     setColor(newColor.hex);
@@ -19,8 +20,8 @@ export default function CarForm({ onClose, onSubmit, error, initialColor }: Prop
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setName('');
     onSubmit(name, color);
+    setName('');
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -41,6 +42,8 @@ export default function CarForm({ onClose, onSubmit, error, initialColor }: Prop
       </button>
       {error && <p className="bg-white p-1 text-red-500">Error creating car. Try again!</p>}
       <input
+        required
+        value={name}
         onChange={handleChange}
         id="name"
         className="w-full px-1 py-2 text-black"
@@ -48,7 +51,6 @@ export default function CarForm({ onClose, onSubmit, error, initialColor }: Prop
       />
       <ChromePicker color={color} onChange={handleChangeColor} />
       <button
-        disabled={name.length === 0}
         className="w-full disabled:bg-gray-800 text-center py-2 bg-rose-800 text-gray-100 font-semibold"
         type="submit"
       >

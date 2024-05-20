@@ -40,6 +40,7 @@ export default function NewCar({ cars, onCarsUpdate }: Props) {
       {open && (
         <div className="absolute">
           <CarForm
+            initialName=""
             initialColor="#333333"
             onClose={toggleModal}
             error={error}

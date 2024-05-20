@@ -49,6 +49,7 @@ export default function ManageCarButtons({ car, onUpdate }: Props) {
       {open && (
         <div className="absolute left-1">
           <CarForm
+            initialName={car.name}
             initialColor={car.color}
             error={error}
             onClose={toggleModal}
