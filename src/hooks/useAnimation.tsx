@@ -1,7 +1,6 @@
 import { useCallback, useState } from 'react';
-import axios from 'axios';
-import { BASE_URL } from '../data/config.ts';
 import { AnimationState, Car, NewWinner } from '../types/types.ts';
+import api from '../utils/api.ts';
 
 function useAnimation(car: Car, onFinish: (winner: NewWinner) => void) {
   const [animation, setAnimation] = useState<AnimationState>({
@@ -16,8 +15,9 @@ function useAnimation(car: Car, onFinish: (winner: NewWinner) => void) {
 
   const handleStart = useCallback(async () => {
     try {
-      const { data } = await axios.patch(`${BASE_URL}/engine/?id=${car.id}&status=started`);
-      const dataDuration = data.distance / data.velocity;
+      const { distance, velocity } = await api.startEngine(car.id);
+
+      const dataDuration = distance / velocity;
 
       setAnimation((prevState) => ({
         ...prevState,
@@ -29,7 +29,7 @@ function useAnimation(car: Car, onFinish: (winner: NewWinner) => void) {
         duration: dataDuration / 1000,
       }));
 
-      await axios.patch(`${BASE_URL}/engine/?id=${car.id}&status=drive`);
+      await api.drive(car.id);
     } catch (err) {
       setAnimation((prevState) => ({
         ...prevState,
@@ -40,7 +40,7 @@ function useAnimation(car: Car, onFinish: (winner: NewWinner) => void) {
     }
   }, [car.id]);
 
-  const handleStop = useCallback(() => {
+  const handleStop = useCallback(async () => {
     setAnimation({
       isAnimating: false,
       isStopped: true,

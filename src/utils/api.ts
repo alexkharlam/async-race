@@ -1,5 +1,12 @@
 import axios from 'axios';
-import { Car, NewWinner, WinnerData, WinnerWithCarData, WinnersData } from '../types/types.ts';
+import {
+  Car,
+  NewWinner,
+  EngineData,
+  WinnerData,
+  WinnerWithCarData,
+  WinnersData,
+} from '../types/types.ts';
 import { BASE_URL } from '../data/config.ts';
 
 const getWinner = async (carId: number) => {
@@ -49,9 +56,25 @@ export const updateCar = async (carId: number, color: string, name: string) => {
 };
 
 // Drive
-export const requestRace = async (carId: string, status: string) => {
+export const startEngine = async (carId: number): Promise<EngineData> => {
+  const res = await axios.patch<EngineData>(`${BASE_URL}/engine`, null, {
+    params: { id: carId, status: 'started' },
+  });
+
+  return res.data;
+};
+
+export const drive = async (carId: number) => {
   const res = await axios.patch(`${BASE_URL}/engine`, null, {
-    params: { id: carId, status },
+    params: { id: carId, status: 'drive' },
+  });
+
+  return res.data;
+};
+
+export const stopEngine = async (carId: number): Promise<EngineData> => {
+  const res = await axios.patch<EngineData>(`${BASE_URL}/engine`, null, {
+    params: { id: carId, status: 'stopped' },
   });
 
   return res.data;
@@ -124,4 +147,7 @@ export default {
   deleteCar,
   createCar,
   getCars,
+  startEngine,
+  drive,
+  stopEngine,
 };
