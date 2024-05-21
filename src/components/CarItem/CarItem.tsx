@@ -4,7 +4,7 @@ import Track from './Track.tsx';
 import StatusMessage from './StatusMessage.tsx';
 import MoveButtons from './MoveButtons.tsx';
 import ManageCarButtons from './ManageCarButtons.tsx';
-import useAnimation from '../../hooks/useAnimation.tsx';
+import useAnimation from '../../hooks/useAnimation.ts';
 
 type Props = {
   car: Car;

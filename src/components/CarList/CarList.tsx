@@ -1,9 +1,9 @@
 import { Car } from '../../types/types.ts';
-import usePagination from '../../hooks/usePagination.tsx';
+import usePagination from '../../hooks/usePagination.ts';
 import PaginationButtons from '../ui/PaginationButtons.tsx';
 import CarItem from '../CarItem/CarItem.tsx';
 import RaceButtons from './RaceButtons.tsx';
-import useRace from '../../hooks/useRace.tsx';
+import useRace from '../../hooks/useRace.ts';
 import NewCar from './NewCar.tsx';
 import GenerateCars from './GenerateCars.tsx';
 import WinnerMessage from './WinnerMessage.tsx';

@@ -1,10 +1,10 @@
 import { Edit2, Trash } from 'react-feather';
 import { Car } from '../../types/types.ts';
-import useModal from '../../hooks/useModal.tsx';
+import useModal from '../../hooks/useModal.ts';
 import CarForm from '../CarList/CarForm.tsx';
 import IconButton from '../ui/IconButton.tsx';
-import useUpdateCar from '../../hooks/useUpdateCar.tsx';
-import useDeleteCar from '../../hooks/useDeleteCar.tsx';
+import useUpdateCar from '../../hooks/useUpdateCar.ts';
+import useDeleteCar from '../../hooks/useDeleteCar.ts';
 
 type Props = {
   car: Car;

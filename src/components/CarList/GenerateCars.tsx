@@ -1,5 +1,5 @@
 import TextButton from '../ui/TextButton.tsx';
-import useGenerateCars from '../../hooks/useGenerateCars.tsx';
+import useGenerateCars from '../../hooks/useGenerateCars.ts';
 
 type Props = {
   onCarsUpdate: () => void;
