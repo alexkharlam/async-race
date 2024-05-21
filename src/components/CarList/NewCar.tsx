@@ -1,15 +1,14 @@
 import CarForm from './CarForm.tsx';
 import useModal from '../../hooks/useModal.ts';
 import TextButton from '../ui/TextButton.tsx';
-import { Car } from '../../types/types.ts';
 import useCreateCar from '../../hooks/useCreateCar.ts';
 
 type Props = {
   onCarsUpdate: () => void;
-  cars: Car[];
+  carsLength: number;
 };
 
-export default function NewCar({ cars, onCarsUpdate }: Props) {
+export default function NewCar({ carsLength, onCarsUpdate }: Props) {
   const createCar = useCreateCar();
   const { open, toggleModal } = useModal();
 
@@ -20,7 +19,7 @@ export default function NewCar({ cars, onCarsUpdate }: Props) {
   return (
     <div className="relative justify-self-start">
       <div className="flex flex-col gap-1 items-center">
-        <p className="text-base font-bold">{`${cars.length} cars`}</p>
+        <p className="text-base font-bold">{`${carsLength} cars`}</p>
         <TextButton onClick={toggleModal} className=" text-md px-2 py-[4px]">
           Add car
         </TextButton>

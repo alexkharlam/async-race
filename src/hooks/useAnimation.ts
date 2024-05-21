@@ -47,8 +47,7 @@ function useAnimation(car: Car, onFinish: (winner: NewWinner) => void) {
 
   const handleUpdate = useCallback(
     (latest: { x: number }) => {
-      if (!animation.isAnimating) return;
-      updateAnimation({ x: latest.x });
+      if (animation.isAnimating) updateAnimation({ x: latest.x });
     },
     [animation.isAnimating, updateAnimation],
   );

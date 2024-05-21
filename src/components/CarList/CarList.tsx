@@ -20,7 +20,7 @@ export default function CarList({ cars, onUpdate }: Props) {
   return (
     <div className="p-2 relative">
       <div className="grid md:grid-cols-3 grid-cols-2 grid-rows-2 md:grid-rows-1 items-center mt-2 mb-3.5 gap-y-3 md:gap-y-[0px]">
-        <NewCar cars={cars} onCarsUpdate={onUpdate} />
+        <NewCar carsLength={cars.length} onCarsUpdate={onUpdate} />
         <RaceButtons race={race} onReset={resetRace} onStartRace={startRace} />
         <GenerateCars onCarsUpdate={onUpdate} />
       </div>
@@ -34,14 +34,13 @@ export default function CarList({ cars, onUpdate }: Props) {
           car={car}
         />
       ))}
-      <div className="ml-auto flex justify-end">
-        <PaginationButtons
-          currentPage={currentPage}
-          pageCount={pageCount}
-          setNextPage={setNextPage}
-          setPrevPage={setPrevPage}
-        />
-      </div>
+      <PaginationButtons
+        race={race}
+        currentPage={currentPage}
+        pageCount={pageCount}
+        setNextPage={setNextPage}
+        setPrevPage={setPrevPage}
+      />
       {race.winner && <WinnerMessage name={race.winner.name} />}
     </div>
   );
