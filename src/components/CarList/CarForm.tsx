@@ -1,6 +1,8 @@
-import { X } from 'react-feather';
-import { ChromePicker, ColorResult } from 'react-color';
-import { FormEvent, useState, ChangeEvent } from 'react';
+import { ChromePicker } from 'react-color';
+import { FormEvent } from 'react';
+import useInput from '../../hooks/useInput.ts';
+import useColorPicker from '../../hooks/useColorPicker.ts';
+import CloseIconButton from '../ui/CloseIconButton.tsx';
 
 type Props = {
   onClose: () => void;
@@ -10,21 +12,14 @@ type Props = {
 };
 
 export default function CarForm({ onClose, onSubmit, initialColor, initialName }: Props) {
-  const [name, setName] = useState(initialName);
-  const [color, setColor] = useState(initialColor);
-  const handleChangeColor = (newColor: ColorResult) => {
-    setColor(newColor.hex);
-  };
+  const { inputValue, handleInput, resetInput } = useInput(initialName);
+  const { handleColor, color } = useColorPicker(initialColor);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    onSubmit(name, color);
-    setName('');
-  };
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
+    onSubmit(inputValue, color);
+    resetInput();
   };
 
   return (
@@ -32,22 +27,16 @@ export default function CarForm({ onClose, onSubmit, initialColor, initialName }
       onSubmit={handleSubmit}
       className="relative z-30 border-rose-800 border- shadow-md shadow-slate-500"
     >
-      <button
-        className="absolute text-1xl -top-1.5 -right-1.5 bg-pink-700 rounded-full text-white"
-        type="button"
-        onClick={onClose}
-      >
-        <X />
-      </button>
+      <CloseIconButton onClick={onClose} />
       <input
         required
-        value={name}
-        onChange={handleChange}
+        value={inputValue}
+        onChange={handleInput}
         id="name"
         className="w-full px-1 py-2 text-black"
         placeholder="Car name"
       />
-      <ChromePicker color={color} onChange={handleChangeColor} />
+      <ChromePicker color={color} onChange={handleColor} />
       <button
         className="w-full disabled:bg-gray-800 text-center py-2 bg-blue-primary text-gray-100 font-semibold"
         type="submit"
