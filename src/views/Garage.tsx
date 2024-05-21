@@ -1,5 +1,15 @@
-import CarListContainer from '../components/CarList/CarListContainer.tsx';
+import { useEffect } from 'react';
+import useCarList from '../hooks/useCarList.ts';
+import CarList from '../components/CarList/CarList.tsx';
 
 export default function Garage() {
-  return <CarListContainer />;
+  const { cars, updateCarList } = useCarList();
+
+  useEffect(() => {
+    updateCarList();
+  }, [updateCarList]);
+
+  if (cars && cars.length > 0) {
+    return <CarList onUpdate={updateCarList} cars={cars} />;
+  }
 }
