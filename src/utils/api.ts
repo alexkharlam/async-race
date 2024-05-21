@@ -7,39 +7,40 @@ import {
   WinnerWithCarData,
   WinnersData,
 } from '../types/types.ts';
-import { BASE_URL } from '../data/config.ts';
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 const getWinner = async (carId: number) => {
-  const res = await axios.get(`${BASE_URL}/winners/${carId}`);
+  const res = await axios.get(`${API_URL}/winners/${carId}`);
 
   return res;
 };
 
 // Cars
 export const getCars = async (): Promise<Car[]> => {
-  const res = await axios.get<Car[]>(`${BASE_URL}/garage`);
+  const res = await axios.get<Car[]>(`${API_URL}/garage`);
 
   return res.data;
 };
 
 export const getCar = async (carId: number): Promise<Car> => {
-  const res = await axios.get<Car>(`${BASE_URL}/garage/${carId}`);
+  const res = await axios.get<Car>(`${API_URL}/garage/${carId}`);
 
   return res.data;
 };
 
 export const createCar = async (color: string, name: string) => {
-  const res = await axios.post(`${BASE_URL}/garage`, { name, color });
+  const res = await axios.post(`${API_URL}/garage`, { name, color });
 
   return res;
 };
 
 export const deleteCar = async (carId: number) => {
   try {
-    await axios.delete(`${BASE_URL}/garage/${carId}`);
+    await axios.delete(`${API_URL}/garage/${carId}`);
     await getWinner(carId);
 
-    await axios.delete(`${BASE_URL}/winners/${carId}`);
+    await axios.delete(`${API_URL}/winners/${carId}`);
   } catch (err) {
     if (!axios.isAxiosError(err)) return;
 
@@ -50,14 +51,14 @@ export const deleteCar = async (carId: number) => {
 };
 
 export const updateCar = async (carId: number, color: string, name: string) => {
-  const res = await axios.put(`${BASE_URL}/garage/${carId}`, { name, color });
+  const res = await axios.put(`${API_URL}/garage/${carId}`, { name, color });
 
   return res.data;
 };
 
 // Drive
 export const startEngine = async (carId: number): Promise<EngineData> => {
-  const res = await axios.patch<EngineData>(`${BASE_URL}/engine`, null, {
+  const res = await axios.patch<EngineData>(`${API_URL}/engine`, null, {
     params: { id: carId, status: 'started' },
   });
 
@@ -65,7 +66,7 @@ export const startEngine = async (carId: number): Promise<EngineData> => {
 };
 
 export const drive = async (carId: number) => {
-  const res = await axios.patch(`${BASE_URL}/engine`, null, {
+  const res = await axios.patch(`${API_URL}/engine`, null, {
     params: { id: carId, status: 'drive' },
   });
 
@@ -73,7 +74,7 @@ export const drive = async (carId: number) => {
 };
 
 export const stopEngine = async (carId: number): Promise<EngineData> => {
-  const res = await axios.patch<EngineData>(`${BASE_URL}/engine`, null, {
+  const res = await axios.patch<EngineData>(`${API_URL}/engine`, null, {
     params: { id: carId, status: 'stopped' },
   });
 
@@ -82,13 +83,13 @@ export const stopEngine = async (carId: number): Promise<EngineData> => {
 
 // WINNERS
 export const getWinners = async (): Promise<WinnersData> => {
-  const res = await axios.get<WinnersData>(`${BASE_URL}/winners`);
+  const res = await axios.get<WinnersData>(`${API_URL}/winners`);
 
   return res.data;
 };
 
 const createWinner = async (winner: NewWinner) => {
-  const res = await axios.post(`${BASE_URL}/winners`, {
+  const res = await axios.post(`${API_URL}/winners`, {
     id: winner.id,
     wins: 1,
     time: winner.duration,
@@ -100,7 +101,7 @@ const createWinner = async (winner: NewWinner) => {
 const updateWinner = async (winner: NewWinner, oldBestTime: number, oldWins: number) => {
   const newTime = winner.duration < oldBestTime ? winner.duration : oldBestTime;
 
-  const res = await axios.put(`${BASE_URL}/winners/${winner.id}`, {
+  const res = await axios.put(`${API_URL}/winners/${winner.id}`, {
     wins: oldWins + 1,
     time: newTime,
   });

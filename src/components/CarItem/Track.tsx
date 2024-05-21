@@ -4,7 +4,8 @@ import { PiCarProfileFill } from 'react-icons/pi';
 import classNames from 'classnames';
 import { AnimationState, Car } from '../../types/types.ts';
 import CarInfo from './CarInfo.tsx';
-import { TRACK_LENGTH } from '../../data/config.ts';
+
+const trackLength = window.innerWidth - 215; // -215px
 
 type Props = {
   car: Car;
@@ -17,7 +18,7 @@ export default function Track({ car, animation, onUpdate, onComplete }: Props) {
   const containerClass = classNames('relative pl-2');
 
   return (
-    <div style={{ width: `${TRACK_LENGTH + 100}px` }} className={containerClass}>
+    <div style={{ width: `${trackLength + 100}px` }} className={containerClass}>
       <div className="w-full h-0.5 bg-gradient-to-r from-blue-500 to-pink-600 absolute left-2 bottom-[6px]" />
 
       <FaFlagCheckered
@@ -25,7 +26,7 @@ export default function Track({ car, animation, onUpdate, onComplete }: Props) {
         className="opacity-25 absolute top-1/2 -translate-y-1/2 right-[-5px] pr-1 border-r-2"
       />
       <motion.div
-        animate={animation.isAnimating ? { x: TRACK_LENGTH } : { x: animation.x }}
+        animate={animation.isAnimating ? { x: trackLength } : { x: animation.x }}
         transition={
           animation.isAnimating
             ? { duration: animation.duration, ease: 'easeInOut' }

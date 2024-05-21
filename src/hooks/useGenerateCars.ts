@@ -1,9 +1,10 @@
 import { toast } from 'react-toastify';
 import randomColor from 'randomcolor';
-import { RANDOM_CARS_QUANTITY } from '../data/config.ts';
 import createCarName from '../utils/createCarName.ts';
 import api from '../utils/api.ts';
 import toastErrors from '../data/toastErrors.ts';
+
+const RANDOM_CARS_QUANTITY = import.meta.env.VITE_RANDOM_CARS_QUANTITY;
 
 function useGenerateCars() {
   const generateCars = async (onCarUpdate: () => void) => {
