@@ -3,8 +3,8 @@ import randomColor from 'randomcolor';
 import createCarName from '../utils/createCarName.ts';
 import api from '../utils/api.ts';
 import toastErrors from '../data/toastErrors.ts';
+import { RANDOM_CARS_QUANTITY } from '../data/config.ts';
 
-const RANDOM_CARS_QUANTITY = import.meta.env.VITE_RANDOM_CARS_QUANTITY;
 
 function useGenerateCars() {
   const generateCars = async (onCarUpdate: () => void) => {

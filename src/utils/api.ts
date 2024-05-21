@@ -7,8 +7,7 @@ import {
   WinnerWithCarData,
   WinnersData,
 } from '../types/types.ts';
-
-const API_URL = import.meta.env.VITE_API_URL;
+import { API_URL } from '../data/config.ts';
 
 const getWinner = async (carId: number) => {
   const res = await axios.get(`${API_URL}/winners/${carId}`);
