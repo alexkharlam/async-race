@@ -20,5 +20,6 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'error',
     'object-curly-newline': 'off',
     'operator-linebreak': 'off',
+    'max-lines-per-function': ['error', { max: 40 }],
   },
 };
