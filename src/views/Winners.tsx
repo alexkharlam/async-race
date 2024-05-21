@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getWinnersWithCarData } from '../utils/api.ts';
 import type { WinnerWithCarData } from '../types/types.ts';
-import WinnersTable from '../components/winners/WinnersTable.tsx';
+import WinnersTable from '../components/Winners/WinnersTable.tsx';
 
 export default function Winners() {
   const [winners, setWinners] = useState<WinnerWithCarData[]>();

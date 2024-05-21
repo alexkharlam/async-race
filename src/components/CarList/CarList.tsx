@@ -1,7 +1,7 @@
 import { Car } from '../../types/types.ts';
 import usePagination from '../../hooks/usePagination.ts';
 import PaginationButtons from '../ui/PaginationButtons.tsx';
-import CarItem from '../carItem/CarItem.tsx';
+import CarItem from '../CarItem/CarItem.tsx';
 import RaceButtons from './RaceButtons.tsx';
 import useRace from '../../hooks/useRace.ts';
 import NewCar from './NewCar.tsx';
