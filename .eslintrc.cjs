@@ -11,15 +11,15 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:jsx-a11y/recommended',
     'plugin:react/jsx-runtime',
+    'plugin:prettier/recommended',
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'react', 'jsx-a11y', 'react-hooks'],
+  plugins: ['@typescript-eslint', 'react', 'jsx-a11y', 'react-hooks', 'prettier'],
   rules: {
     'react/jsx-filename-extension': ['error', { extensions: ['.jsx', '.tsx'] }],
     '@typescript-eslint/no-explicit-any': 'error',
-    'object-curly-newline': 'off',
-    'operator-linebreak': 'off',
     'max-lines-per-function': ['error', { max: 40 }],
+    'prettier/prettier': 'error',
   },
 };
