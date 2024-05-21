@@ -3,7 +3,8 @@ import { Car } from '../../types/types.ts';
 import useModal from '../../hooks/useModal.tsx';
 import CarForm from '../CarList/CarForm.tsx';
 import IconButton from '../ui/IconButton.tsx';
-import useCarOperations from '../../hooks/useCarOperations.tsx';
+import useUpdateCar from '../../hooks/useUpdateCar.tsx';
+import useDeleteCar from '../../hooks/useDeleteCar.tsx';
 
 type Props = {
   car: Car;
@@ -11,7 +12,8 @@ type Props = {
 };
 
 export default function ManageCarButtons({ car, onUpdate }: Props) {
-  const { updateCar, deleteCar } = useCarOperations();
+  const deleteCar = useDeleteCar();
+  const updateCar = useUpdateCar();
   const { open, toggleModal } = useModal();
 
   const handleSubmit = (name: string, color: string) => {

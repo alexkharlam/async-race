@@ -2,7 +2,7 @@ import CarForm from './CarForm.tsx';
 import useModal from '../../hooks/useModal.tsx';
 import TextButton from '../ui/TextButton.tsx';
 import { Car } from '../../types/types.ts';
-import useCarOperations from '../../hooks/useCarOperations.tsx';
+import useCreateCar from '../../hooks/useCreateCar.tsx';
 
 type Props = {
   onCarsUpdate: () => void;
@@ -10,7 +10,7 @@ type Props = {
 };
 
 export default function NewCar({ cars, onCarsUpdate }: Props) {
-  const { createCar } = useCarOperations();
+  const createCar = useCreateCar();
   const { open, toggleModal } = useModal();
 
   const handleSubmit = (name: string, color: string) => {

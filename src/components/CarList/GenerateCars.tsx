@@ -1,12 +1,12 @@
 import TextButton from '../ui/TextButton.tsx';
-import useCarOperations from '../../hooks/useCarOperations.tsx';
+import useGenerateCars from '../../hooks/useGenerateCars.tsx';
 
 type Props = {
   onCarsUpdate: () => void;
 };
 
 export default function GenerateCars({ onCarsUpdate }: Props) {
-  const { generateCars } = useCarOperations();
+  const generateCars = useGenerateCars();
 
   return (
     <TextButton
