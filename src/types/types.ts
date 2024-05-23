@@ -8,7 +8,7 @@ export type AnimationState = {
   finished: boolean;
   duration: number;
 };
-export type Race = {
+export type RaceStatus = {
   isRacing: boolean;
   winner: null | { name: string; id: number };
   isResetted: boolean;

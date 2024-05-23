@@ -20,6 +20,6 @@ export default function Garage() {
     );
   }
   if (cars && cars.length > 0) {
-    return <CarList onUpdate={updateCarList} cars={cars} />;
+    return <CarList onCarsUpdate={updateCarList} cars={cars} />;
   }
 }

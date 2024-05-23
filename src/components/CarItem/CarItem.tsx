@@ -1,33 +1,29 @@
-import { useEffect } from 'react';
-import { Car, Race, NewWinner } from '../../types/types.ts';
+import { Ref, forwardRef, useImperativeHandle } from 'react';
+import { Car, NewWinner } from '../../types/types.ts';
 import Track from './Track.tsx';
 import StatusMessage from './StatusMessage.tsx';
 import MoveButtons from './MoveButtons.tsx';
 import ManageCarButtons from './ManageCarButtons.tsx';
 import useAnimation from '../../hooks/useAnimation.ts';
 
+export type RefType = {
+  handleStart: () => void;
+  handleStop: () => void;
+};
+
 type Props = {
   car: Car;
   onUpdate: () => void;
-  race: Race;
   onFinish: (winner: NewWinner) => void;
 };
 
-export default function CarItem({ car, onUpdate, race, onFinish }: Props) {
+const CarItem = forwardRef(({ car, onUpdate, onFinish }: Props, ref: Ref<RefType>) => {
   const { animation, handleFinish, handleStart, handleStop, handleUpdate } = useAnimation(
     car,
     onFinish,
   );
 
-  useEffect(() => {
-    if (race.isResetted) {
-      handleStop();
-    }
-
-    if (race.isRacing) {
-      handleStart();
-    }
-  }, [race, handleStart, handleStop]);
+  useImperativeHandle(ref, () => ({ handleStart, handleStop }));
 
   return (
     <div className="mb-3">
@@ -39,4 +35,8 @@ export default function CarItem({ car, onUpdate, race, onFinish }: Props) {
       </div>
     </div>
   );
-}
+});
+
+CarItem.displayName = 'CarItem';
+
+export default CarItem;

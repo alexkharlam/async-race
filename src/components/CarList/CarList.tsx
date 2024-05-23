@@ -2,46 +2,52 @@ import { Car } from '../../types/types.ts';
 import usePagination from '../../hooks/usePagination.ts';
 import PaginationButtons from '../ui/PaginationButtons.tsx';
 import CarItem from '../CarItem/CarItem.tsx';
-import RaceButtons from './RaceButtons.tsx';
-import useRace from '../../hooks/useRace.ts';
-import NewCar from './NewCar.tsx';
-import GenerateCars from './GenerateCars.tsx';
+import useRaceStatus from '../../hooks/useRaceStatus.ts';
 import WinnerMessage from './WinnerMessage.tsx';
+import useRaceRefs from '../../hooks/useRaceRefs.ts';
+import ManageCarList from './ManageCarList.tsx';
 
 type Props = {
   cars: Car[];
-  onUpdate: () => void;
+  onCarsUpdate: () => void;
 };
 
-export default function CarList({ cars, onUpdate }: Props) {
-  const { race, startRace, resetRace, handleCarFinished } = useRace();
+export default function CarList({ cars, onCarsUpdate }: Props) {
+  const { raceStatus, setRaceResetted, setRaceStarted, handleCarFinished } = useRaceStatus();
   const { paginatedData, currentPage, pageCount, setNextPage, setPrevPage } = usePagination(cars);
+  const { carsRefs, startCar, stopCar } = useRaceRefs(
+    paginatedData,
+    setRaceStarted,
+    setRaceResetted,
+  );
 
   return (
     <div className="p-2 relative">
-      <div className="grid md:grid-cols-3 grid-cols-2 grid-rows-2 md:grid-rows-1 items-center mt-2 mb-3.5 gap-y-3 md:gap-y-[0px]">
-        <NewCar carsLength={cars.length} onCarsUpdate={onUpdate} />
-        <RaceButtons race={race} onReset={resetRace} onStartRace={startRace} />
-        <GenerateCars onCarsUpdate={onUpdate} />
-      </div>
+      <ManageCarList
+        allCarsLength={cars.length}
+        raceStatus={raceStatus}
+        onUpdate={onCarsUpdate}
+        onStartRace={startCar}
+        onResetRace={stopCar}
+      />
 
-      {paginatedData.map((car) => (
+      {paginatedData.map((car, index) => (
         <CarItem
+          ref={carsRefs.current[index]}
           onFinish={handleCarFinished}
-          race={race}
-          onUpdate={onUpdate}
+          onUpdate={onCarsUpdate}
           key={car.id}
           car={car}
         />
       ))}
       <PaginationButtons
-        race={race}
+        raceStatus={raceStatus}
         currentPage={currentPage}
         pageCount={pageCount}
         setNextPage={setNextPage}
         setPrevPage={setPrevPage}
       />
-      {race.winner && <WinnerMessage name={race.winner.name} />}
+      {raceStatus.winner && <WinnerMessage name={raceStatus.winner.name} />}
     </div>
   );
 }

@@ -2,8 +2,6 @@ import { PiCarProfileFill } from 'react-icons/pi';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { WinnerWithCarData } from '../../types/types.ts';
 import { WINNERS_PAGE_LIMIT } from '../../data/config.ts';
- 
-
 
 type Props = {
   winners: WinnerWithCarData[];

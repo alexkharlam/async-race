@@ -5,7 +5,6 @@ import api from '../utils/api.ts';
 import toastErrors from '../data/toastErrors.ts';
 import { RANDOM_CARS_QUANTITY } from '../data/config.ts';
 
-
 function useGenerateCars() {
   const generateCars = async (onCarUpdate: () => void) => {
     try {

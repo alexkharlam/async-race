@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Car } from '../types/types.ts';
 import { CARS_PAGE_LIMIT } from '../data/config.ts';
 
-
 function usePagination(items: Car[]) {
   const [currentPage, setCurrentPage] = useState(0);
   const pageCount = Math.ceil(items.length / CARS_PAGE_LIMIT);

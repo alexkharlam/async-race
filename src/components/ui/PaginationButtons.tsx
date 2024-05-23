@@ -1,13 +1,13 @@
 import classNames from 'classnames';
 import { ArrowLeft, ArrowRight } from 'react-feather';
-import { Race } from '../../types/types.ts';
+import { RaceStatus } from '../../types/types.ts';
 
 type Props = {
   setPrevPage: () => void;
   setNextPage: () => void;
   currentPage: number;
   pageCount: number;
-  race: Race;
+  raceStatus: RaceStatus;
 };
 
 export default function PaginationButtons({
@@ -15,7 +15,7 @@ export default function PaginationButtons({
   setPrevPage,
   currentPage,
   pageCount,
-  race,
+  raceStatus,
 }: Props) {
   const buttonClass = classNames(
     'bg-rose-700 rounded-full text-gray-200 p-1 hover:bg-rose-800 disabled:bg-gray-500',
@@ -25,7 +25,7 @@ export default function PaginationButtons({
     <div className="flex gap-2 items-center p-2 justify-center">
       <button
         onClick={setPrevPage}
-        disabled={currentPage === 0 || race.isRacing}
+        disabled={currentPage === 0 || raceStatus.isRacing}
         className={buttonClass}
         type="button"
       >
@@ -37,7 +37,7 @@ export default function PaginationButtons({
       </p>
       <button
         onClick={setNextPage}
-        disabled={currentPage === pageCount - 1 || race.isRacing}
+        disabled={currentPage === pageCount - 1 || raceStatus.isRacing}
         className={buttonClass}
         type="button"
       >
