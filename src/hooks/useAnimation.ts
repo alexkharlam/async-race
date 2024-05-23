@@ -36,7 +36,7 @@ function useAnimation(car: Car, onFinish: (winner: NewWinner) => void) {
       updateAnimation({ ...startedAnimationState, duration: dataDuration / 1000 });
       await api.drive(car.id);
     } catch (err) {
-      updateAnimation({ isAnimating: false, isPaused: true, broken: true });
+      updateAnimation({ isAnimating: false, isPaused: true, broken: true, finished: false });
     }
   }, [car.id, updateAnimation]);
 
