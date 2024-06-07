@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Car } from '../types/types.ts';
-import { CARS_PAGE_LIMIT } from '../data/config.ts';
+
+const CARS_PAGE_LIMIT = Number(import.meta.env.VITE_CARS_PAGE_LIMIT);
 
 function usePagination(items: Car[]) {
   const [currentPage, setCurrentPage] = useState(0);

@@ -7,7 +7,8 @@ import {
   WinnerWithCarData,
   WinnersData,
 } from '../types/types.ts';
-import { API_URL } from '../data/config.ts';
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 const getWinner = async (carId: number) => {
   const res = await axios.get(`${API_URL}/winners/${carId}`);
@@ -15,7 +16,6 @@ const getWinner = async (carId: number) => {
   return res;
 };
 
-// Cars
 export const getCars = async (): Promise<Car[]> => {
   const res = await axios.get<Car[]>(`${API_URL}/garage`);
 
@@ -55,7 +55,6 @@ export const updateCar = async (carId: number, color: string, name: string) => {
   return res.data;
 };
 
-// Drive
 export const startEngine = async (carId: number): Promise<EngineData> => {
   const res = await axios.patch<EngineData>(`${API_URL}/engine`, null, {
     params: { id: carId, status: 'started' },
@@ -80,7 +79,6 @@ export const stopEngine = async (carId: number): Promise<EngineData> => {
   return res.data;
 };
 
-// WINNERS
 export const getWinners = async (): Promise<WinnersData> => {
   const res = await axios.get<WinnersData>(`${API_URL}/winners`);
 
